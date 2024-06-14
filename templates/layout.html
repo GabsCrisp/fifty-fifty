@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block css_principal %}
+        <link rel="stylesheet" href="static/styles.css">
+        {% endblock %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Homepage{% endblock %}</title>
+        {% block extra_head %} {% endblock %}
+    </head>
+    <body>
+        <header class="main_header">
+            <div class="main_header_icono">
+                <img class="icono_image_logo" src="static/logos/main.svg" alt="">
+                <img class="icono_image_text" src="static/logos/title.svg" alt="">
+            </div>
+            {% block head %}
+            <div class="main_header_button">
+                <a href="/login"><button>
+                        <h1>Ir a la app</h1>
+                    </button></a>
+            </div>
+            {% endblock %}
+        </header>
+        {% block content %}{% endblock %}
+    </body>
+</html>

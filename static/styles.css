@@ -1,0 +1,271 @@
+@font-face {
+    font-family: 'poppins-bold';
+    src: url('../static/fonts/Poppins-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'poppins-light';
+    src: url('../static/fonts/Poppins-Light.ttf');
+}
+
+* {
+    transition: all 0.5s ease-in-out;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.main_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #DAE2B6;
+}
+
+@media (max-width: 800px) {
+    .main_header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.main_header_icono {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    max-height: 150px;
+}
+
+@media (max-width: 800px) {
+    .main_header_icono {
+        width: 80%;
+        height: 50%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-height: none;
+    }
+}
+
+.icono_image_text {
+    margin: 5%;
+    max-width: 40%;
+    max-height: 40%;
+}
+
+
+@media (max-width: 800px) {
+    .icono_image_text {
+        max-width: 50%;
+        max-height: none;
+    }
+}
+
+.icono_image_logo {
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    max-width: 20%;
+    max-height: 40%;
+}
+
+@media (max-width: 800px) {
+    .icono_image_logo {
+        max-width: 40%;
+    }
+}
+
+.main_header_button {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 50%;
+    min-height: 100%;
+    max-height: 150px;
+}
+
+@media (max-width: 800px) {
+    .main_header_button {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50%;
+        max-height: none;
+    }
+}
+
+.main_header_button a {
+    width: 25%;
+    margin-right: 5%;
+}
+
+@media (max-width: 1400px) {
+    .main_header_button a {
+        width: 35%;
+    }
+}
+
+@media (max-width: 900px) {
+    .main_header_button a {
+        width: 40%;
+    }
+}
+
+@media (max-width: 800px) {
+    .main_header_button a {
+        width: 40%;
+        margin-right: 0;
+    }
+}
+
+.main_header_button a button {
+    width: 100%;
+    background-color: #43766C;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 800px) {
+    .main_header_button a button {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}
+
+.main_header_button a button h1 {
+    color: white;
+    font-family: 'poppins-light';
+}
+
+h2, h3 {
+    font-family: 'poppins-bold';
+}
+
+p {
+    font-family: 'poppins-light';
+}
+
+.main_container {
+    background-color: #FBF9F1;
+}
+
+.margin_section {
+    transition: all 0.5s ease-in-out;
+}
+
+.main_equipo {
+    width: auto;
+    padding: 30px;
+}
+
+.equipo_imagenes {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media (max-width: 800px) {
+    .equipo_imagenes {
+        flex-direction: column;
+    }
+}
+
+.equipo_imagenes .equipo_imagen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.equipo_imagenes .equipo_imagen img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media (max-width: 1300px) {
+    .equipo_imagenes .equipo_imagen img {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .equipo_imagenes .equipo_imagen img {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 800px) {
+    .equipo_imagenes .equipo_imagen img {
+
+        width: 400px;
+        height: 400px;
+        margin-top: 30px;
+    }
+}
+
+.equipo_imagenes .equipo_imagen h3 {
+    margin-top: 30px;
+}
+
+.equipo_imagenes .equipo_imagen p {
+    margin: 0;
+}
+
+.margin_section:hover {
+    background-color: white;
+}
+
+.text_container {
+    text-align: justify;
+}
+
+.main_introduccion {
+    padding: 30px;
+}
+
+.main_mision {
+    padding: 30px;
+}
+
+.main_vision {
+    padding: 30px;
+}
+
+footer {
+    width: 100%;
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DAE2B6;
+}
+
+footer h3 {
+    font-family: 'poppins-light';
+}
+
+/* - - - - Esto es para la navbar */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(95, 95, 95);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: gray;
+}
