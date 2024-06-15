@@ -1,4 +1,4 @@
-let input = document.getElementsByClassName('input');
+let input = document.querySelectorAll('.input');
 let boton = document.getElementById('registro');
 let form = document.getElementById('form');
 let contador = 0;

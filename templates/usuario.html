@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block css_principal %}{% endblock %}
+{% block title %}Eventos{% endblock %}
+
+{% block head %}
+<div class="user">
+    <img id = "usuario_imagen" src="static/logos/usuario.svg" alt="">
+    <h4>¡Hola, nombre_usuario!</h4>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="static/styles_usuario.css">
+{% endblock %}
+
+{% block content %}
+<section class="registro">
+
+    <div class="contenedor-registro">
+        <h3>¿Quieres cambiar tu contraseña?</h3>
+        <form>
+            <label for="password">Cambiar contraseña:</label>
+            <input type="password" class= "input" name="password" id="password"placeholder="Ingresa tu contraseña">
+            <label for="password">Confirma cambio de contraseña:</label>
+            <input type="password" class= "input" name="password" id="password"placeholder="Confirma cambio de contraseña">
+            <div class="changepasscont">
+                <button type="submit" class="boton_cambiocontrasena">
+                    <a href="">
+                        <h4>Cambiar contraseña</h4>
+                    </a>
+                </button>
+            </div>
+        </form>
+     </div> 
+
+     <button type="submit" class="boton_cerrarsesion">
+        <a href="">
+            <h4>Cerrar sesión</h4>
+        </a>
+    </button>
+        
+</section>
+
+{% endblock %}
