@@ -1,14 +1,22 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, jsonify, session
+from flask_session import Session
+from helpers import login_required, session_activate
 from werkzeug.security import generate_password_hash
 import sqlite3
 
 conn = sqlite3.connect("fiftyfifty.db", check_same_thread=False)
 db = conn.cursor()
-# Configure application.
+# Configuración de la aplicación.
 app = Flask(__name__)
+
+#Configuracion de la sesión
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 @app.route("/")
 def index():
+    session.clear()
     return render_template("index.html")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -17,6 +25,7 @@ def login():
         return render_template("login.html")
 
 @app.route("/register", methods=["GET", "POST"])
+@session_activate
 def register():
     if request.method == "GET":
         return render_template("register.html")
@@ -43,6 +52,8 @@ def register():
         conn.commit()
         response = {"status":"success", "redirect": "/sineventos"}
         #TODO: hashear contra, devolver respuesta al front, devolvemos estado y a donde va a redireccionar
+        # creamos la sesión y almacena el nombre de usuario de la persona
+        session["username"] = username
         return jsonify(response)
 
 
@@ -51,6 +62,7 @@ def temporal():
     return render_template("tmp.html")
 
 @app.route("/sineventos")
+@login_required
 def sineventos():
     return render_template("sineventos.html")
 
