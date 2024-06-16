@@ -7,6 +7,9 @@
     <img id = "usuario_imagen" src="static/logos/usuario.svg" alt="">
     <h4>¡Hola, {{session["username"]}}!</h4>
 </div>
+<form action="/logout">
+    <button type="submit">Log out</button>
+</form>
 {% endblock %}
 
 {% block extra_head %}
@@ -25,10 +28,16 @@
     </div>
 </main>
 <script>
+    sessionStorage.setItem('loggedIn', 'true')
     function changeColor() {
         document.querySelector('.add-button').classList.toggle('clicked');
     }
     console.log("a");
     console.log(sessionStorage.getItem('loggedIn'));
+    window.onpopstate = function (event) {
+  alert(
+    "a"
+  );
+};
 </script>
 {% endblock %}
