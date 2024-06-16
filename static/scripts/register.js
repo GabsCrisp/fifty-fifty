@@ -79,6 +79,7 @@ function confirmacion() {
 
                         window.location =data['redirect'];
                     })
+                    sessionStorage.setItem('loggedIn', 'true')
 
                 }
                 else 
