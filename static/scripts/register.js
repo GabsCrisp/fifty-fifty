@@ -4,9 +4,12 @@ let form = document.getElementById("form");
 let password = document.getElementById("password");
 let confirmpassword = document.getElementById("confirmpassword");
 let email = document.getElementById("email");
+
+//Diccionario que va a almacenar toda la informacion que se va a enviar al backend
 let info = {};
+
 //previene no recargar el formulario
-form.addEventListener("submit", function(e){
+form.addEventListener("submit", function (e) {
     e.preventDefault();
 })
 registro.addEventListener("click", confirmacion);
@@ -37,36 +40,69 @@ function chequeo_input() {
     }
 }
 function confirmacion() {
-    if(!(email.value.includes("@")))
-        {
-            Swal.fire({
-                title: "El formato del correo no es válido",
-                text: "",
-                icon: "error",
-              });
-              return;
+    if (!(email.value.includes("@"))) {
+        Swal.fire({
+            title: "El formato del correo no es válido",
+            text: "",
+            icon: "error",
+        });
+        return;
+    }
+    if (password.value == confirmpassword.value) {
+        //fetch
+        info["username"] = document.getElementById("nombre_usuario").value;
+        info["email"] = document.getElementById("email").value;
+        info["password"] = password.value;
+        info["confirmpassword"] = confirmpassword.value;
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = ""
         }
-    if (password.value == confirmpassword.value)
-        {
-            Swal.fire({
-                title: "¡Registro exitoso!",
-                text: "",
-                icon: "success",
-              });
-              
-              return;
-              //fetch
-              //verificar nombre de usuarios e email en la db
-              //hashear contra
-              //insertar
-        }
-    else
-    {
+        fetch("/register", {
+            method: 'POST',
+            headers: {
+                // indica que los datos a enviar serán en formato json
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(info)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+
+            if(data['status'] == 'success')
+                {
+                    Swal.fire({
+                        title: "¡Registro exitoso!",
+                        text: "",
+                        icon: "success",
+                    })
+                    .then(function() {
+
+                        window.location =data['redirect'];
+                    })
+
+                }
+                else 
+                {
+                    Swal.fire({
+                        title: "Ya existe un usuario con ese nombre de usuario o email en la aplicacion",
+                        text: "",
+                        icon: "error",
+                    })
+                    .then(function() {
+
+                        window.location =data['redirect'];
+                    })
+                }
+            
+        })
+        return;
+    }
+    else {
         Swal.fire({
             title: "¡Contraseñas no coinciden!",
             text: "",
             icon: "error"
-          });
-          return;
+        });
+        return;
     }
 }
