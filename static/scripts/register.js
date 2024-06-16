@@ -5,6 +5,8 @@ let password = document.getElementById("password");
 let confirmpassword = document.getElementById("confirmpassword");
 let email = document.getElementById("email");
 
+//validar email correctamente
+const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 //Diccionario que va a almacenar toda la informacion que se va a enviar al backend
 let info = {};
 
@@ -40,7 +42,9 @@ function chequeo_input() {
     }
 }
 function confirmacion() {
-    if (!(email.value.includes("@"))) {
+    //regex permite validacion de inputs 
+    //es una herramienta que ya es parte de js
+    if (!regex.test(email.value)) {
         Swal.fire({
             title: "El formato del correo no es válido",
             text: "",

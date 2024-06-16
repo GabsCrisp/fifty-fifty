@@ -6,10 +6,10 @@
 <div class="user">
     <img id = "usuario_imagen" src="static/logos/usuario.svg" alt="">
     <h4>¡Hola, {{session["username"]}}!</h4>
+    <form action="/logout">
+        <button type="submit">Log out</button>
+    </form>
 </div>
-<form action="/logout">
-    <button type="submit">Log out</button>
-</form>
 {% endblock %}
 
 {% block extra_head %}
