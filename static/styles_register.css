@@ -167,6 +167,11 @@ form label {
     font-family: 'poppins-light';
     font-size: 0.9rem;
 }
+#registro:disabled 
+{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 @media (max-width: 800px) {
 
