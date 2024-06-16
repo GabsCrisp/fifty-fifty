@@ -151,11 +151,7 @@ h3 {
     top: 1em;
 }
 
-#registro:disabled 
-{
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+
 
 form label {
     margin-top: 0.5em;
