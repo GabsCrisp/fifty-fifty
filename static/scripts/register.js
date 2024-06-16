@@ -4,6 +4,7 @@ let form = document.getElementById("form");
 let password = document.getElementById("password");
 let confirmpassword = document.getElementById("confirmpassword");
 let email = document.getElementById("email");
+let info = {};
 //previene no recargar el formulario
 form.addEventListener("submit", function(e){
     e.preventDefault();
@@ -52,6 +53,7 @@ function confirmacion() {
                 text: "",
                 icon: "success",
               });
+              
               return;
               //fetch
               //verificar nombre de usuarios e email en la db
