@@ -30,8 +30,8 @@
                         <input type="password" class= "input" id="password" placeholder="Ingresa tu contraseña" required>
                         <label for="password">Confirma tu contraseña:</label>
                         <input type="password" class= "input" id="confirmpassword" placeholder="Confirma tu contraseña" required>
-                            <button type="submit" class="boton_iniciarsesion" id="registro">
-                                    <h3>Iniciar sesión</h3>
+                            <button type="submit" class="boton_iniciarsesion" id="registro" disabled>
+                                    <h3>Regístrate</h3>
                             </button>
                     </form>
                  </div> 
@@ -47,5 +47,6 @@
     {% block script %}
     <script src="../static/scripts/register.js"></script>
     {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
