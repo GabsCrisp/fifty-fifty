@@ -2,3 +2,7 @@
 env/
 #ignorar cache
 __pycache__
+#ignorar bd
+fiftyfifty.db
+#
+flask_session
