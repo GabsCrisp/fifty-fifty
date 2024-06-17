@@ -69,6 +69,15 @@ main {
     color: #000000;
 }
 
+.right-button {
+    background-color: #d4e1c5;
+
+}
+
+.wrong-button {
+    background-color: #f2a7b3;
+}
+
 @font-face {
     font-family: 'poppins-bold';
     src: url('../static/fonts/Poppins-Bold.ttf');
