@@ -44,7 +44,6 @@ function confirmacion() {
     // fetch de la información
     info_login["acceso"] = acceso.value;
     info_login["password"] = password.value;
-
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = ""
     }

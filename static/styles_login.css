@@ -19,19 +19,19 @@
 
 body,
 html {
-    height: 100%;
+    font-family: 'poppins-bold';
     margin: 0;
     background-color: #FBF9F1;
 }
 
 main {
     display: flex;
-    height: 90%;
+    height: 90vh;
 }
 
 footer,
 header {
-    height: 5%;
+    height: 5vh;
     background-color: #43766C;
     font-family:"poppins-light";
     font-size: 0.8rem;

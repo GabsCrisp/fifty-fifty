@@ -28,16 +28,15 @@ def login():
     else:
         # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
         respuesta = request.get_json()
+        print(respuesta)
         acceso = respuesta['acceso']
         password = respuesta['password']
 
         # Buscar usuario por nombre de usuario o email
         usuario = db.execute("SELECT * FROM usuarios WHERE usuario = ? OR email = ?", (acceso, acceso)).fetchone()
-        conn.commit()
-
-        if usuario and check_password_hash(usuario['hash'], password):
+        if usuario[1] and check_password_hash(usuario[3], password):
             # Contraseña correcta, iniciar sesión
-            session["username"] = usuario['usuario']
+            session["username"] = usuario[1]
             response = {"status": "success", "redirect": "/sineventos"}
         else:
             # Contraseña incorrecta o usuario no encontrado
