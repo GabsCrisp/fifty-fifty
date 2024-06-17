@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify, session
 from flask_session import Session
 from helpers import login_required, session_activate
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
 conn = sqlite3.connect("fiftyfifty.db", check_same_thread=False)
@@ -25,12 +25,31 @@ def index():
 def login():
     if request.method == "GET":
         return render_template("login.html")
+    else:
+        # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
+        respuesta = request.get_json()
+        acceso = respuesta['acceso']
+        password = respuesta['password']
 
+        # Buscar usuario por nombre de usuario o email
+        usuario = db.execute("SELECT * FROM usuarios WHERE usuario = ? OR email = ?", (acceso, acceso)).fetchone()
+        conn.commit()
+
+        if usuario and check_password_hash(usuario['hash'], password):
+            # Contraseña correcta, iniciar sesión
+            session["username"] = usuario['usuario']
+            response = {"status": "success", "redirect": "/sineventos"}
+        else:
+            # Contraseña incorrecta o usuario no encontrado
+            response = {"status": "error", "redirect": "/login"}
+
+        return jsonify(response)
 
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
+
 @app.route("/register", methods=["GET", "POST"])
 @session_activate
 def register():
@@ -54,7 +73,6 @@ def register():
                 return jsonify(response)
             
         hash = generate_password_hash(respuesta['password'])
-        print(hash)
         db.execute("INSERT INTO usuarios(usuario, email, hash) VALUES(?,?,?)", (username,email, hash))
         conn.commit()
         response = {"status":"success", "redirect": "/sineventos"}

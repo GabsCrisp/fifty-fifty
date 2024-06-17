@@ -21,8 +21,6 @@ for (let i = 0; i < inputs.length; i++) {
 }
 
 // Funcion chequeo_input: Revisa si cada uno de los inputs tiene valores y habilita o desahabilita el boton
-
-let deshabilitado = true;
 let contador = 0;
 function chequeo_input() {
     contador = 0;

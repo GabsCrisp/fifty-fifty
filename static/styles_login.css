@@ -71,7 +71,6 @@ footer h3 {
 section {
     width: 50%;
 }
-
 .registro {
     display: flex;
     flex-direction: column;
@@ -146,7 +145,7 @@ h3 {
     padding: 0.8em;
 }
 
-.boton_iniciarsesion a h3 {
+.boton_iniciarsesion h3 {
     text-decoration: none;
     color: white;
     font-family: 'poppins-bold';
@@ -158,11 +157,11 @@ form label {
     text-align: left;
     font-family: 'poppins-light';
 }
-footer 
+#iniciosesion:disabled 
 {
-    color: white;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
-
 @media (max-width: 800px) {
 
     .imagen {
