@@ -246,3 +246,17 @@ h4 {
         font-size: 0.6rem;
     }
 }
+
+.input {
+    border: 3px solid #97A265;
+    border-radius: 10px;
+    padding: 8px;
+    outline: none;
+    font-family: 'poppins-light';
+    width: 100%;
+}
+
+.input:focus {
+    border-color: #97A265;
+    box-shadow: 0 0 5px rgba(151, 162, 101, 0.5);
+}
