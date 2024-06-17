@@ -45,8 +45,6 @@ def login():
 
         return jsonify(response)
 
-
-
 @app.route("/logout")
 def logout():
     session.clear()
