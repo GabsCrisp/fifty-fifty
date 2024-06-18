@@ -95,10 +95,10 @@ def temporal():
 def sineventos():
     return render_template("sineventos.html")
 
-@app.route("/creacion_eventos")
+@app.route("/participantes")
 @session_activate
-def creacion_eventos():
-    return render_template("creacion_eventos.html")
+def participantes():
+    return render_template("participantes.html")
 
 @app.route("/usuario")
 def usuario():
