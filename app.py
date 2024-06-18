@@ -28,20 +28,25 @@ def login():
     else:
         # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
         respuesta = request.get_json()
-        print(respuesta)
         acceso = respuesta['acceso']
         password = respuesta['password']
 
         # Buscar usuario por nombre de usuario o email
         usuario = db.execute("SELECT * FROM usuarios WHERE usuario = ? OR email = ?", (acceso, acceso)).fetchone()
-        if usuario[1] and check_password_hash(usuario[3], password):
-            # Contraseña correcta, iniciar sesión
-            session["username"] = usuario[1]
-            response = {"status": "success", "redirect": "/sineventos"}
-        else:
-            # Contraseña incorrecta o usuario no encontrado
-            response = {"status": "error", "redirect": "/login"}
+        print (usuario)
 
+        if usuario:
+            if check_password_hash(usuario[3], password):
+                # Contraseña correcta, usuario encontrado
+                session["username"] = usuario[1]
+                response = {"status": "success", "redirect": "/sineventos"}
+            else:
+                # Usuario encontrado, pero contraseña incorrecta
+                response = {"status": "error", "message": "Contraseña incorrecta", "redirect": "/login"}
+        else:
+            # Usuario no encontrado
+            response = {"status": "error", "message": "Usuario no encontrado", "redirect": "/login"}
+        
         return jsonify(response)
 
 @app.route("/logout")
@@ -90,8 +95,11 @@ def temporal():
 def sineventos():
     return render_template("sineventos.html")
 
+@app.route("/creacion_eventos")
+@session_activate
+def creacion_eventos():
+    return render_template("creacion_eventos.html")
+
 @app.route("/usuario")
 def usuario():
     return render_template("usuario.html")
-
-
