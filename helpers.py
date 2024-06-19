@@ -13,6 +13,6 @@ def session_activate(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("username"):
-            return redirect("/sineventos")
+            return redirect("/eventos")
         return f(*args, **kwargs)
     return decorated_function

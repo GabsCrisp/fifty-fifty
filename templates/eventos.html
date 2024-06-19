@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="static/styles_sineventos.css">
+<link rel="stylesheet" href="static/styles_eventos.css">
 {% endblock %}
 
 {% block content %}
@@ -35,13 +35,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="">
+          <form action=""  method="post" id="crear-evento">
             <input type="text" class= "input" name="evento" id="nombre_evento" placeholder = "e.g nombre_de_evento">
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn wrong-button" data-bs-dismiss="modal">Descartar</button>
-          <button type="button" class="btn right-button">Crear</button>
+          <button type="submit" class="btn right-button" form="crear-evento">Crear</button>
         </div>
       </div>
     </div>
@@ -51,8 +51,6 @@
     function changeColor() {
         document.querySelector('.add-button').classList.toggle('clicked');
     }
-    console.log("a");
-    console.log(sessionStorage.getItem('loggedIn'));
     window.onpopstate = function (event) {
   alert(
     "a"
