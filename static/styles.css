@@ -24,6 +24,10 @@ body {
     justify-content: space-between;
     background-color: #DAE2B6;
 }
+.main_header_icono a 
+{
+    text-decoration: none;
+}
 
 @media (max-width: 800px) {
     .main_header {
@@ -33,22 +37,18 @@ body {
     }
 }
 
-.main_header_icono {
+.main_header_icono a {
     display: flex;
-    width: 50%;
-    height: 100%;
-    max-height: 150px;
 }
 
 @media (max-width: 800px) {
-    .main_header_icono {
-        width: 80%;
-        height: 50%;
+    .main_header_icono a {
         flex-direction: column;
         justify-content: center;
         align-items: center;
         max-height: none;
     }
+
 }
 
 .icono_image_text {
@@ -84,8 +84,6 @@ body {
     justify-content: end;
     align-items: center;
     width: 50%;
-    min-height: 100%;
-    max-height: 150px;
 }
 
 @media (max-width: 800px) {

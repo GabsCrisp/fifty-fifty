@@ -4,7 +4,9 @@
 
 {% block head %}
 <div class="user">
-    <h4>¡Hola, {{session["username"]}}!</h4>
+    <a href="/usuario">
+        <h4>¡Hola, {{session["username"]}}!</h4>
+    </a>
     <form action="/logout">
         <button type="submit">Log out</button>
     </form>
