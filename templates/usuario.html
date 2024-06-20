@@ -19,7 +19,7 @@
 <section class="registro">
     <div class="contenedor-registro">
         <h3>¿Quieres cambiar tu contraseña?</h3>
-        <form>
+        <form id ="form">
             <label for="password_actual">Ingresa contraseña actual:</label>
             <input type="password" class="input" name="password_actual" id="password_actual"
                 placeholder="Contraseña actual">
@@ -30,11 +30,14 @@
             <input type="password" class="input" name="password_confirm" id="password_confirm"
                 placeholder="Confirma cambio de contraseña">
             <div class="changepasscont">
-                <button type="submit" class="boton_cambiocontrasena">Cambiar contraseña</button>
+                <button type="submit" class="boton_cambiocontrasena" id = "contrasena" disabled>Cambiar contraseña</button>
             </div>
         </form>
     </div>
 
 </section>
 
+{% endblock %}
+{% block script %}
+<script src="../static/scripts/usuarios.js"></script>
 {% endblock %}
