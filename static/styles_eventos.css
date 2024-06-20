@@ -170,26 +170,6 @@ a {
     font-family: 'poppins-light';
 }
 
-@media (max-width: 800px) {
-
-    .icono_image_text {
-        margin: 5%;
-        max-width: 70%;
-        max-height: 70%;
-    }
-
-
-    .icono_image_logo {
-        margin-left: 5%;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        max-width: 40%;
-        max-height: 40%;
-    }
-
-
-
-}
 
 @media (min-width: 800px) and (max-width: 1200px) {
     .no-events-message {
