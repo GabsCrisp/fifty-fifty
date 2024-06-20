@@ -53,3 +53,6 @@ function crearEvento() {
 
 }
 
+function irEvento(idEvento) {
+    location.href= 'eventos/' + idEvento;
+}

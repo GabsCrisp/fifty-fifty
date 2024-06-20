@@ -21,19 +21,29 @@
 <h1>Nombre_Evento</h1>
 <main>
     <section class="event-container">
-            <form>
+        <div class="event-box">
+            <form method="post">
                 <label for="participants">Participantes (nombre usuario o e-mail)</label>
                 <select id="participants" class="input">
                     <option>Placeholder</option>
                 </select>
-                <div class="form-group">
-                    <label for="invited">Invitados(nombre)</label>
-                    <input type="text" id="invited" class="input">
-                </div>
+                <input type="hidden" name="tipoUsuario" value="participante">
                 <div class="participants">
                     <button id="add-participants">Agregar participantes</button>
                 </div>
             </form>
+
+            <form method="post">
+                <div class="form-group">
+                    <label for="invited">Invitados(nombre)</label>
+                    <input type="text" id="invited" name="participante" class="input">
+                    <input type="hidden" name="tipoUsuario" value="invitado">
+                </div>
+                <div class="participants">
+                    <button id="add-participants">Agregar invitado</button>
+                </div>
+            </form>
+        </div>
     </section>
     <div class="vertical-line"></div>
     <section class="participants-list">

@@ -104,7 +104,7 @@ def temporal():
 @login_required
 def eventos():
     if request.method =="GET":
-        rows = db.execute("SELECT nombre_evento FROM eventos WHERE id_usuario = ?", (session["id"],)).fetchall()
+        rows = db.execute("SELECT nombre_evento, id_evento FROM eventos WHERE id_usuario = ?", (session["id"],)).fetchall()
         return render_template("eventos.html", rows= rows)
     else:
         respuesta = request.get_json()
@@ -123,28 +123,10 @@ def participantes():
 @app.route("/usuario", methods=["GET", "POST"])
 @login_required
 def usuario():
-    if request.method == "GET":
-        return render_template("usuario.html")
-    else:
-        # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
-        respuesta = request.get_json()
-        password_actual = respuesta['password_actual']
-        password_nueva = respuesta['password_nueva']
+    return render_template("usuario.html")
 
-        # Buscar usuario por 
-        usuario = db.execute("SELECT * FROM usuarios WHERE id = ?", (session["id"],)).fetchone()
-
-        if (check_password_hash(usuario[3], password_actual)):
-            response = {"status": "success", "redirect": "/usuario", "message": "Cambio de contraseña exitoso"}
-            db.execute("UPDATE usuarios SET hash= ? WHERE id = ?", (generate_password_hash(password_nueva), session["id"]))
-            conn.commit()
-        else:
-            response = {"status": "error", "redirect": "/usuario", "message": "La contraseña actual es incorrecta"}
-
-        return jsonify(response)
-        
 
 @app.route("/eventos/<idEvento>", methods=["GET", "POST"])
 @login_required
 def detalle_evento(idEvento):
-    return get_detalle_evento(idEvento, request)
+    return get_detalle_evento(db, idEvento, request,conn)
