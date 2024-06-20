@@ -4,6 +4,8 @@ from helpers import login_required, session_activate
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
+from services import get_detalle_evento
+
 conn = sqlite3.connect("fiftyfifty.db", check_same_thread=False)
 db = conn.cursor()
 # Configuración de la aplicación.
@@ -97,8 +99,7 @@ def temporal():
 @login_required
 def eventos():
     if request.method =="GET":
-        rows = db.execute("SELECT nombre_evento FROM eventos WHERE id_usuario = ?", (session["id"],)).fetchall()
-        print(rows)
+        rows = db.execute("SELECT nombre_evento, id_evento FROM eventos WHERE id_usuario = ?", (session["id"],)).fetchall()
         return render_template("eventos.html", rows= rows)
     else:
         respuesta = request.get_json()
@@ -117,3 +118,9 @@ def participantes():
 @app.route("/usuario")
 def usuario():
     return render_template("usuario.html")
+
+
+@app.route("/eventos/<idEvento>", methods=["GET", "POST"])
+@login_required
+def detalle_evento(idEvento):
+    return get_detalle_evento(db, idEvento, request,conn)
