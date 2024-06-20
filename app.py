@@ -128,14 +128,12 @@ def usuario():
     else:
         # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
         respuesta = request.get_json()
-        print("a")
-        print(respuesta)
         password_actual = respuesta['password_actual']
         password_nueva = respuesta['password_nueva']
 
         # Buscar usuario por 
         usuario = db.execute("SELECT * FROM usuarios WHERE id = ?", (session["id"],)).fetchone()
-        
+        print(usuario[3])
         response = {"status": "success", "redirect": "/usuario", "message": "¡Evento registrado!"}
         return jsonify(response)
         

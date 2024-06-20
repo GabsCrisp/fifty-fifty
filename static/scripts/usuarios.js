@@ -42,7 +42,17 @@ boton_cambiarcontrasena.addEventListener("click", confirmacion);
 
 function confirmacion() {
 
-    if (password_nueva.value == password_confirm.value) {
+    if (password_nueva.value == password_confirm.value) 
+        {
+            if (password_actual.value == password_confirm.value)
+                {
+                    Swal.fire({
+                        title: "¡Su nueva contraseña no puede ser igual a la actual!",
+                        text: "",
+                        icon: "error",
+                    });
+                    return;   
+                }
         //fetch
         info_contrasena["password_actual"] = password_actual.value;
         info_contrasena["password_nueva"] = password_nueva.value;
