@@ -24,7 +24,6 @@ def index():
 @session_activate
 def login():
     if request.method == "GET":
-        print(session)
         return render_template("login.html")
     else:
         # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
@@ -34,8 +33,6 @@ def login():
 
         # Buscar usuario por nombre de usuario o email
         usuario = db.execute("SELECT * FROM usuarios WHERE usuario = ? OR email = ?", (acceso, acceso)).fetchone()
-        print (usuario)
-
         if usuario:
             if check_password_hash(usuario[3], password):
                 # Contraseña correcta, usuario encontrado
@@ -66,11 +63,8 @@ def register():
         respuesta = request.get_json()
         username = respuesta['username']
         email = respuesta['email']
-        print(username)
-        print(email)
 
         usuarios = db.execute("SELECT * FROM usuarios").fetchall()
-        print(usuarios)
         for usuario in usuarios:
             if usuario[1] == username or usuario[2]== email:
                 # response es un diccionario que se le manda al frontend indicando que si hubo
@@ -81,11 +75,13 @@ def register():
         hash = generate_password_hash(respuesta['password'])
         db.execute("INSERT INTO usuarios(usuario, email, hash) VALUES(?,?,?)", (username,email, hash))
         conn.commit()
+        user_id = db.execute("SELECT * FROM usuarios WHERE usuario = ?", (username,)).fetchone()
         response = {"status":"success", "redirect": "/eventos"}
         #TODO: hashear contra, devolver respuesta al front, devolvemos estado y a donde va a redireccionar
         # creamos la sesión y almacena el nombre de usuario de la persona
         session["username"] = username
-        session["id"] = username
+        session["id"] = user_id[0]
+        print(user_id[0])
         return jsonify(response)
 
 
@@ -98,7 +94,6 @@ def temporal():
 def eventos():
     if request.method =="GET":
         rows = db.execute("SELECT nombre_evento FROM eventos WHERE id_usuario = ?", (session["id"],)).fetchall()
-        print(rows)
         return render_template("eventos.html", rows= rows)
     else:
         respuesta = request.get_json()
