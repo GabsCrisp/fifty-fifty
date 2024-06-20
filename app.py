@@ -125,6 +125,30 @@ def participantes():
 def usuario():
     if request.method == "GET":
         return render_template("usuario.html")
+    else:
+        # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
+        respuesta = request.get_json()
+        password_actual = respuesta['password_actual']
+        password_nueva = respuesta['password_nueva']
+
+        # Buscar usuario por 
+        usuario = db.execute("SELECT * FROM usuarios WHERE id_usuario = ?", (password_actual,).fetchone()
+
+        if usuario:
+            if check_password_hash(usuario[3], password):
+                # Contraseña correcta, usuario encontrado
+                session["username"] = usuario[1]
+                session["id"] = usuario[0]
+                response = {"status": "success", "redirect": "/eventos"}
+            else:
+                # Usuario encontrado, pero contraseña incorrecta
+                response = {"status": "error", "message": "Contraseña incorrecta", "redirect": "/login"}
+        else:
+            # Usuario no encontrado
+            response = {"status": "error", "message": "Usuario no encontrado", "redirect": "/login"}
+        
+        return jsonify(response)
+        
         
 
 
