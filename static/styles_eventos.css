@@ -19,19 +19,20 @@
     vertical-align: middle;
 }
 
-html,
-body {
-    height: 100%;
-    background-color: #FBF9F1;
+h4{
+    text-align: center;
 }
-
 main {
     text-align: center;
     display: flex;
+    gap: 1em;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70%;
+    min-height: 70vh;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
 }
 
 
@@ -167,6 +168,23 @@ p {
 
 a {
     text-decoration: none;
+    font-family: 'poppins-light';
+}
+
+.card-body{
+    background-color:#B6CFAC;
+    width: 100%;
+    border-radius: 5px;
+    font-family: 'poppins-bold';
+    font-size: 1.2em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+h5{
+    margin-top: 1em;
+    font-size: 0.5em;
+    text-align: left;
     font-family: 'poppins-light';
 }
 

@@ -40,7 +40,7 @@ function crearEvento() {
             else {
                 Swal.fire({
                     title: "toy dormida",
-                    text: "",
+                    text: "", 
                     icon: "error",
                 })
                     .then(function () {
