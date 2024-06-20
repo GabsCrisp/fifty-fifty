@@ -4,9 +4,6 @@ let password = document.getElementById("password")
 let iniciosesion = document.getElementById("iniciosesion");
 let form = document.getElementById("form");
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    alert("s");
-})
 //Diccionario que va a almacenar toda la informacion que se va a enviar al backend
 let info_login = {};
 

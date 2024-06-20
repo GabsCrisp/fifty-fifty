@@ -38,7 +38,7 @@ function chequeo_input() {
     }
 }
 
-iniciosesion.addEventListener("click", confirmacion);
+boton_cambiarcontrasena.addEventListener("click", confirmacion);
 
 function confirmacion() {
 
@@ -47,17 +47,17 @@ function confirmacion() {
         info_contrasena["password_actual"] = password_actual.value;
         info_contrasena["password_nueva"] = password_nueva.value;
         info_contrasena["password_confirm"] = password_confirm.value;
-
         for (let i = 0; i < inputs.length; i++) {
+            console.log("a");
             inputs[i].value = ""
         }
-        fetch("/register", {
+        fetch("/usuario", {
             method: 'POST',
             headers: {
                 // indica que los datos a enviar serán en formato json
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(info)
+            body: JSON.stringify(info_contrasena)
         })
             .then((response) => response.json())
             .then((data) => {
@@ -72,7 +72,6 @@ function confirmacion() {
 
                             window.location = data['redirect'];
                         })
-                    //sessionStorage.setItem('loggedIn', 'true')
 
                 }
                 else {

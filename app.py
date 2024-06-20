@@ -128,29 +128,17 @@ def usuario():
     else:
         # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
         respuesta = request.get_json()
+        print("a")
+        print(respuesta)
         password_actual = respuesta['password_actual']
         password_nueva = respuesta['password_nueva']
 
         # Buscar usuario por 
-        usuario = db.execute("SELECT * FROM usuarios WHERE id_usuario = ?", (password_actual,).fetchone()
-
-        if usuario:
-            if check_password_hash(usuario[3], password):
-                # Contraseña correcta, usuario encontrado
-                session["username"] = usuario[1]
-                session["id"] = usuario[0]
-                response = {"status": "success", "redirect": "/eventos"}
-            else:
-                # Usuario encontrado, pero contraseña incorrecta
-                response = {"status": "error", "message": "Contraseña incorrecta", "redirect": "/login"}
-        else:
-            # Usuario no encontrado
-            response = {"status": "error", "message": "Usuario no encontrado", "redirect": "/login"}
+        usuario = db.execute("SELECT * FROM usuarios WHERE id = ?", (session["id"],)).fetchone()
         
+        response = {"status": "success", "redirect": "/usuario", "message": "¡Evento registrado!"}
         return jsonify(response)
         
-        
-
 
 @app.route("/eventos/<idEvento>", methods=["GET", "POST"])
 @login_required
