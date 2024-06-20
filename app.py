@@ -34,10 +34,11 @@ def login():
 
         # Buscar usuario por nombre de usuario o email
         usuario = db.execute("SELECT * FROM usuarios WHERE usuario = ? OR email = ?", (acceso, acceso)).fetchone()
-        if usuario[1] and check_password_hash(usuario[3], password):
-            # Contraseña correcta, iniciar sesión
-            session["username"] = usuario[1]
-            response = {"status": "success", "redirect": "/sineventos"}
+        if usuario:
+            if usuario[1] and check_password_hash(usuario[3], password):
+                # Contraseña correcta, iniciar sesión
+                session["username"] = usuario[1]
+                response = {"status": "success", "redirect": "/sineventos"}
         else:
             # Contraseña incorrecta o usuario no encontrado
             response = {"status": "error", "redirect": "/login"}
