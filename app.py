@@ -4,6 +4,8 @@ from helpers import login_required, session_activate
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
+from services import get_detalle_evento
+
 conn = sqlite3.connect("fiftyfifty.db", check_same_thread=False)
 db = conn.cursor()
 # Configuración de la aplicación.
@@ -84,8 +86,9 @@ def register():
         response = {"status":"success", "redirect": "/eventos"}
         #TODO: hashear contra, devolver respuesta al front, devolvemos estado y a donde va a redireccionar
         # creamos la sesión y almacena el nombre de usuario de la persona
+        user_id = db.execute("SELECT id FROM usuarios WHERE usuario =?",(username,)).fetchone()[0]
         session["username"] = username
-        session["id"] = username
+        session["id"] = user_id
         return jsonify(response)
 
 
@@ -98,7 +101,6 @@ def temporal():
 def eventos():
     if request.method =="GET":
         rows = db.execute("SELECT nombre_evento FROM eventos WHERE id_usuario = ?", (session["id"],)).fetchall()
-        print(rows)
         return render_template("eventos.html", rows= rows)
     else:
         respuesta = request.get_json()
@@ -117,3 +119,9 @@ def participantes():
 @app.route("/usuario")
 def usuario():
     return render_template("usuario.html")
+
+
+@app.route("/eventos/<idEvento>", methods=["GET", "POST"])
+@login_required
+def detalle_evento(idEvento):
+    return get_detalle_evento(idEvento, request)
