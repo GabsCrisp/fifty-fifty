@@ -125,21 +125,23 @@ h3 {
     box-shadow: 0 0 5px rgba(151, 162, 101, 0.5);
 }
 
-form .boton_cambiocontrasena {
+.boton_cambiocontrasena {
     width: auto;
     background-color: #43766C;
     border-radius: 10px;
     border: none;
     justify-content: center;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-}
-
-.boton_cambiocontrasena {
     text-decoration: none;
     font-size: 1em;
     color: white;
     font-family: 'poppins-bold';
     top: 1em;
+}
+.boton_cambiocontrasena:disabled 
+{
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 form label {

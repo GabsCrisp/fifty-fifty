@@ -11,6 +11,15 @@ db = conn.cursor()
 # Configuración de la aplicación.
 app = Flask(__name__)
 
+@app.after_request
+def add_header(response):
+    response.cache_control.no_store = True
+    response.cache_control.no_cache = True
+    response.cache_control.must_revalidate = True
+    response.cache_control.max_age = 0
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 #Configuracion de la sesión
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -111,9 +120,36 @@ def eventos():
 def participantes():
     return render_template("participantes.html")
 
-@app.route("/usuario")
+@app.route("/usuario", methods=["GET", "POST"])
+@login_required
 def usuario():
-    return render_template("usuario.html")
+    if request.method == "GET":
+        return render_template("usuario.html")
+    else:
+        # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
+        respuesta = request.get_json()
+        password_actual = respuesta['password_actual']
+        password_nueva = respuesta['password_nueva']
+
+        # Buscar usuario por 
+        usuario = db.execute("SELECT * FROM usuarios WHERE id_usuario = ?", (password_actual,).fetchone()
+
+        if usuario:
+            if check_password_hash(usuario[3], password):
+                # Contraseña correcta, usuario encontrado
+                session["username"] = usuario[1]
+                session["id"] = usuario[0]
+                response = {"status": "success", "redirect": "/eventos"}
+            else:
+                # Usuario encontrado, pero contraseña incorrecta
+                response = {"status": "error", "message": "Contraseña incorrecta", "redirect": "/login"}
+        else:
+            # Usuario no encontrado
+            response = {"status": "error", "message": "Usuario no encontrado", "redirect": "/login"}
+        
+        return jsonify(response)
+        
+        
 
 
 @app.route("/eventos/<idEvento>", methods=["GET", "POST"])
