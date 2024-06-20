@@ -69,6 +69,15 @@ main {
     color: #000000;
 }
 
+.right-button {
+    background-color: #d4e1c5;
+
+}
+
+.wrong-button {
+    background-color: #f2a7b3;
+}
+
 @font-face {
     font-family: 'poppins-bold';
     src: url('../static/fonts/Poppins-Bold.ttf');
@@ -245,4 +254,18 @@ h4 {
     .user h4 {
         font-size: 0.6rem;
     }
+}
+
+.input {
+    border: 3px solid #97A265;
+    border-radius: 10px;
+    padding: 8px;
+    outline: none;
+    font-family: 'poppins-light';
+    width: 100%;
+}
+
+.input:focus {
+    border-color: #97A265;
+    box-shadow: 0 0 5px rgba(151, 162, 101, 0.5);
 }
