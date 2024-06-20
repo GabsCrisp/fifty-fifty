@@ -5,7 +5,7 @@
 {% block head %}
 <div class="user">
   <img id="evento_imagen" src="static/logos/evento.svg" alt="">
-  <h4>¡Hola, {{session["username"]}}!</h4>
+  <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
   <form action="/logout">
     <button type="submit">Log out</button>
   </form>

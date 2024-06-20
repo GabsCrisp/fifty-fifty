@@ -172,7 +172,8 @@ p {
     margin-top: 1em;
 }
 
-h4 {
+a {
+    text-decoration: none;
     font-family: 'poppins-light';
 }
 

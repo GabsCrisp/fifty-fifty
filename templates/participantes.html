@@ -4,11 +4,12 @@
 
 {% block head %}
 <div class="user">
-    <h4>¡Hola, {{session["username"]}}!</h4>
+    <img id="evento_imagen" src="static/logos/evento.svg" alt="">
+    <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
     <form action="/logout">
-        <button type="submit">Log out</button>
+      <button type="submit">Log out</button>
     </form>
-</div>
+  </div>
 {% endblock %}
 
 {% block extra_head %}

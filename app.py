@@ -133,8 +133,14 @@ def usuario():
 
         # Buscar usuario por 
         usuario = db.execute("SELECT * FROM usuarios WHERE id = ?", (session["id"],)).fetchone()
-        print(usuario[3])
-        response = {"status": "success", "redirect": "/usuario", "message": "¡Evento registrado!"}
+
+        if (check_password_hash(usuario[3], password_actual)):
+            response = {"status": "success", "redirect": "/usuario", "message": "Cambio de contraseña exitoso"}
+            db.execute("UPDATE usuarios SET hash= ? WHERE id = ?", (generate_password_hash(password_nueva), session["id"]))
+            conn.commit()
+        else:
+            response = {"status": "error", "redirect": "/usuario", "message": "La contraseña actual es incorrecta"}
+
         return jsonify(response)
         
 

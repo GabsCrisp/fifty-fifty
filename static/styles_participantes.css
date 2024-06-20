@@ -51,8 +51,10 @@ form button:hover
     align-items: center;
     background-color: #DAE2B6;
 }
-
-
+a {
+    text-decoration: none;
+    font-family: 'poppins-light';
+}
 .main_header_icono {
     display: flex;
     width: 50%;

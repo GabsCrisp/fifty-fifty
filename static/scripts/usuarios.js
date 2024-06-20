@@ -74,7 +74,7 @@ function confirmacion() {
 
                 if (data['status'] == 'success') {
                     Swal.fire({
-                        title: "¡Cambio de contraseña exitoso!",
+                        title: data['message'],
                         text: "",
                         icon: "success",
                     })
@@ -86,7 +86,7 @@ function confirmacion() {
                 }
                 else {
                     Swal.fire({
-                        title: "La contraseña actual ingresada no es válida",
+                        title: data['message'],
                         text: "",
                         icon: "error",
                     })
