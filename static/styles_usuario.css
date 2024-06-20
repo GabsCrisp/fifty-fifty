@@ -160,7 +160,8 @@ a
 }
 h4
 {
-    font-family: 'poppins-light';  
+    font-family: 'poppins-light';
+    text-align: center;
 }
 @media(max-width:600px)
 {
