@@ -34,7 +34,7 @@ function crearEvento() {
 
                         window.location = data['redirect'];
                     })
-                sessionStorage.setItem('loggedIn', 'true')
+                //sessionStorage.setItem('loggedIn', 'true')
 
             }
             else {

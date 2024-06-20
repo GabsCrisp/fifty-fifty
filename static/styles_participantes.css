@@ -16,6 +16,13 @@
 body {
     margin: 0;
     min-height: 100vh;
+    background-color:#f9f7ed;
+    font-family: 'poppins-light';
+
+}
+h1{
+    padding-top: 1em;
+    padding-left: 1em;
 }
 form 
 {
@@ -90,10 +97,6 @@ h3 {
     margin-top: 1em;
 }
 
-h4 {
-    font-family: 'poppins-light';
-}
-
 @media (max-width: 800px) {
 
     .icono_image_text {
@@ -101,7 +104,6 @@ h4 {
         max-width: 70%;
         max-height: 70%;
     }
-
 
     .icono_image_logo {
         margin-left: 5%;
@@ -111,10 +113,7 @@ h4 {
         max-height: 40%;
     }
 
-
-
 }
-
 
 @media (max-width: 600px) {
     .icono_image_text {
@@ -170,59 +169,35 @@ h4 {
 
 /*Contenido de la vista*/
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f7ed;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em;
-    background-color: #d0dbb2;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    margin-right: 10px;
-}
-
-.user-greeting {
-    display: flex;
-    align-items: center;
-}
-
-.user-greeting img {
-    margin-left: 10px;
-}
-
 main {
-    padding: 2em;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    display: flex;
+    justify-content: space-evenly;
+   
+}
+label {
+    margin-bottom:0.8em;
+}
+
+.event-box {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-}
-
-.event-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
+    gap: 2em;
+    width: 30vw;
+    height: 100%;
     max-width: 800px;
 }
 
-.event-details, .participants-list {
+.participants-box {
+    width: 30vw;
+    height: 100%;
+}
+
+.event-box, .participants-box {
     flex: 1;
     padding: 2em;
     background-color: #e5e9c8;
@@ -231,13 +206,8 @@ main {
     margin: 0 1em;
 }
 
-.vertical-line {
-    width: 1px;
-    background-color: grey;
-    height: auto;
-}
 
-.event-details h1, .participants-list h2 {
+.event-box h1, .participants-box h2 {
     margin-bottom: 1em;
 }
 
@@ -249,28 +219,34 @@ main {
     margin-bottom: 1em;
 }
 
+.participants{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 #add-participants {
-    padding: 0.5em 1em;
-    background-color: #4d774e;
-    color: white;
+    width: auto;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    background-color: #43766C;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 0.8em;
+    text-decoration: none;
+    color: white;
+    font-family: 'poppins-bold';
+    top: 1em;
 }
 
-#add-participants:hover {
-    background-color: #3d5c3e;
-}
-
-.participants-list ul {
+.participants-box ul {
     list-style: none;
 }
 
-.participants-list li {
+.participants-box li {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.5em;
-    padding: 0.5em;
+    padding: 0.4em;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -282,43 +258,59 @@ main {
 }
 
 .go-to-event {
-    padding: 0.75em 2em;
-    background-color: #4d774e;
-    color: white;
+    background-color: #43766C;
+    border-radius: 10px;
+    width: 100%;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 1em;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 0.8em;
+    text-decoration: none;
+    color: white;
+    font-family: 'poppins-bold';
+    top: 1em;
 }
 
-.go-to-event:hover {
-    background-color: #3d5c3e;
+.event-div {
+    width: 30%;
+    position: relative;
+    margin: auto;
 }
 
-@media (max-width: 768px) {
-    .event-container {
+.input {
+    border: 3px solid #97A265;
+    border-radius: 10px;
+    padding: 8px;
+    outline: none;
+    font-family: 'poppins-light';
+    width: 100%;
+}
+
+.input:focus {
+    border-color: #97A265;
+    box-shadow: 0 0 5px rgba(151, 162, 101, 0.5);
+}
+
+.vertical-line {
+    border-left:1px solid #000;
+    height: 500px;
+}
+
+@media (max-width: 500px) {
+    main {
+        display: flex;
         flex-direction: column;
-        align-items: center;
+        gap: 1em;
     }
-
     .vertical-line {
+        background-color: #97A265;
         display: none;
     }
-
-    .event-details, .participants-list {
-        width: 100%;
-        padding: 1em;
-        margin: 0;
-        margin-bottom: 1em;
+    .event-box{
+        width:  inherit;
+    }
+    .participants-box{
+        width: inherit;
+        overflow: scroll;
     }
 }
 
-@media (max-width: 480px) {
-    header {
-        flex-direction: column;
-    }
-
-    .logo {
-        margin-bottom: 1em;
-    }
-}

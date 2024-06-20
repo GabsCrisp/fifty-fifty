@@ -24,6 +24,7 @@ def index():
 @session_activate
 def login():
     if request.method == "GET":
+        print(session)
         return render_template("login.html")
     else:
         # respuesta es el diccionario que el frontend devuelve al backend al llamar a fetch
@@ -80,7 +81,7 @@ def register():
         hash = generate_password_hash(respuesta['password'])
         db.execute("INSERT INTO usuarios(usuario, email, hash) VALUES(?,?,?)", (username,email, hash))
         conn.commit()
-        response = {"status":"success", "redirect": "/logout"}
+        response = {"status":"success", "redirect": "/eventos"}
         #TODO: hashear contra, devolver respuesta al front, devolvemos estado y a donde va a redireccionar
         # creamos la sesión y almacena el nombre de usuario de la persona
         session["username"] = username
@@ -104,12 +105,12 @@ def eventos():
         nombre_evento= respuesta['nombre_evento']
         db.execute("INSERT INTO eventos (nombre_evento, id_usuario) values (?,?)", (nombre_evento,session["id"]))
         conn.commit()
-        response = {"status": "success", "redirect": "/eventos", "message": "Evento registrado!"}
+        response = {"status": "success", "redirect": "/eventos", "message": "¡Evento registrado!"}
         return jsonify(response)
 
 
 @app.route("/participantes")
-@session_activate
+@login_required
 def participantes():
     return render_template("participantes.html")
 

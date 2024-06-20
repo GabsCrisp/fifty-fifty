@@ -3,7 +3,7 @@ from functools import wraps
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get("username") is None:
+        if session.get("id") is None:
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
@@ -12,7 +12,7 @@ def login_required(f):
 def session_activate(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get("username"):
+        if session.get("id"):
             return redirect("/eventos")
         return f(*args, **kwargs)
     return decorated_function
