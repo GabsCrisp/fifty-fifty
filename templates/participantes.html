@@ -7,9 +7,9 @@
     <img id="evento_imagen" src="static/logos/evento.svg" alt="">
     <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
     <form action="/logout">
-      <button type="submit">Log out</button>
+        <button type="submit">Log out</button>
     </form>
-  </div>
+</div>
 {% endblock %}
 
 {% block extra_head %}
@@ -23,11 +23,12 @@
     <section class="event-container">
         <div class="event-box">
             <form method="post">
-                <label for="participants">Participantes (nombre usuario o e-mail)</label>
-                <select id="participants" class="input">
-                    <option>Placeholder</option>
-                </select>
-                <input type="hidden" name="tipoUsuario" value="participante">
+                <div class="form-group">
+                    <label for="participants">Participantes (nombre usuario o e-mail)</label>
+                    <input type="text" class="input" name="participante">
+                    <input type="hidden" name="tipoUsuario" value="participante">
+                </div>
+
                 <div class="participants">
                     <button id="add-participants">Agregar participantes</button>
                 </div>
@@ -47,14 +48,12 @@
     </section>
     <div class="vertical-line"></div>
     <section class="participants-list">
-            <h2>Participantes:</h2>
-            <ul>
-                <li>Elote_quemuele <span class="remove">x</span></li>
-                <li>Adilia_quesillo <span class="remove">x</span></li>
-                <li>Oneyda_DBdeveloper <span class="remove">x</span></li>
-                <li>Mayrinn_prodigy <span class="remove">x</span></li>
-                <li>Gabs_quecrispa <span class="remove">x</span></li>
-            </ul>
+        <h2>Participantes:</h2>
+        <ul>
+            {% for record in rows %}
+            <li>{{record[3]}} <span class="remove">x</span></li>
+            {% endfor %}
+        </ul>
     </section>
 </main>
 <div class="event-div">

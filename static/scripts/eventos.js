@@ -39,8 +39,8 @@ function crearEvento() {
             }
             else {
                 Swal.fire({
-                    title: "toy dormida",
-                    text: "", 
+                    title: "Occurió un error",
+                    text: "",
                     icon: "error",
                 })
                     .then(function () {
@@ -54,5 +54,5 @@ function crearEvento() {
 }
 
 function irEvento(idEvento) {
-    location.href= 'eventos/' + idEvento;
+    location.href = 'eventos/' + idEvento;
 }
