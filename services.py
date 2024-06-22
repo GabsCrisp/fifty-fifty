@@ -10,7 +10,7 @@ def get_detalle_evento(db, idEvento, request, conn):
         participante = respuesta_json["participante"]
         if tipo_usuario == "invitado":
             db.execute(
-                "INSERT INTO participantes_evento(id_evento,nombre_participante) values(?,?)", (idEvento, participante))
+                "INSERT INTO participante_evento(id_evento,nombre_participante) values(?,?)", (idEvento, participante))
             conn.commit()
         else:
             respuesta = db.execute(
@@ -23,7 +23,7 @@ def get_detalle_evento(db, idEvento, request, conn):
                 return jsonify(response)
             id_usuario = respuesta[0]
             respuesta = db.execute(
-                "SELECT id_usuario FROM participantes_evento WHERE id_usuario = ? AND id_evento = ?", (
+                "SELECT id_usuario FROM participante_evento WHERE id_usuario = ? AND id_evento = ?", (
                     id_usuario, idEvento)
             ).fetchone()
             if respuesta:
@@ -31,7 +31,7 @@ def get_detalle_evento(db, idEvento, request, conn):
                             idEvento, "message": "Participante ya ingresado"}
                 return jsonify(response)
             db.execute(
-                "INSERT INTO participantes_evento(id_evento,nombre_participante,id_usuario) values(?,?,?)", (idEvento, participante, id_usuario))
+                "INSERT INTO participante_evento(id_evento,nombre_participante,id_usuario) values(?,?,?)", (idEvento, participante, id_usuario))
             conn.commit()
 
         response = {"status": "success", "redirect":  "/eventos/" +
@@ -39,7 +39,7 @@ def get_detalle_evento(db, idEvento, request, conn):
         return jsonify(response)
 
     rows = db.execute(
-        "SELECT * FROM participantes_evento WHERE id_evento = ?", (idEvento,)
+        "SELECT * FROM participante_evento WHERE id_evento = ?", (idEvento,)
     ).fetchall()
 
     return render_template("participantes.html", rows=rows, id_evento = idEvento)

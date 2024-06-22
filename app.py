@@ -96,9 +96,9 @@ def register():
         return jsonify(response)
 
 
-@app.route("/tmp")
-def temporal():
-    return render_template("tmp.html")
+@app.route("/consumo_evento")
+def consumo_evento():
+    return render_template("consumo_evento.html")
 
 @app.route("/eventos", methods=["GET", "POST"])
 @login_required
