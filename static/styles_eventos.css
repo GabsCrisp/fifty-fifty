@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 * {
     transition: all 0.5s ease-in-out;
 }
@@ -19,19 +21,20 @@
     vertical-align: middle;
 }
 
-html,
-body {
-    height: 100%;
-    background-color: #FBF9F1;
+h4{
+    text-align: center;
 }
-
 main {
     text-align: center;
     display: flex;
+    gap: 1em;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70%;
+    min-height: 70vh;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
 }
 
 
@@ -69,6 +72,15 @@ main {
     color: #000000;
 }
 
+.right-button {
+    background-color: #d4e1c5;
+
+}
+
+.wrong-button {
+    background-color: #f2a7b3;
+}
+
 @font-face {
     font-family: 'poppins-bold';
     src: url('../static/fonts/Poppins-Bold.ttf');
@@ -87,22 +99,33 @@ body {
     margin: 0;
     min-height: 100vh;
 }
+form 
+{
+    margin-bottom: 1em;
+}
+form button 
+{
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+    border: 1px solid transparent;
+    border-radius: 1em;
+    padding: 0.5em 3em 0.5em 3em;
+    font-family: 'poppins-bold';
+    transition: 1s;
 
-
+}
+form button:hover 
+{
+    transform: scale(1.1);
+    color: white;
+    background-color: black;
+}
 .main_header {
     width: 100%;
+    height: 20vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #DAE2B6;
-}
-
-
-.main_header_icono {
-    display: flex;
-    width: 50%;
-    height: 100%;
-    max-height: 150px;
 }
 
 
@@ -145,30 +168,28 @@ p {
     margin-top: 1em;
 }
 
-h4 {
+a {
+    text-decoration: none;
     font-family: 'poppins-light';
 }
 
-@media (max-width: 800px) {
-
-    .icono_image_text {
-        margin: 5%;
-        max-width: 70%;
-        max-height: 70%;
-    }
-
-
-    .icono_image_logo {
-        margin-left: 5%;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        max-width: 40%;
-        max-height: 40%;
-    }
-
-
+.card-body{
+    background-color:#B6CFAC;
+    width: 100%;
+    border-radius: 5px;
+    font-family: 'poppins-bold';
+    font-size: 1.2em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 }
+
+h5{
+    margin-top: 1em;
+    font-size: 0.5em;
+    text-align: left;
+    font-family: 'poppins-light';
+}
+
 
 @media (min-width: 800px) and (max-width: 1200px) {
     .no-events-message {
@@ -197,10 +218,6 @@ h4 {
         height: 30px;
         width: 30px;
     }
-
-    .user h4 {
-        font-size: 0.8rem;
-    }
 }
 @media (max-width: 300px) {
     .icono_image_text {
@@ -224,7 +241,19 @@ h4 {
         width: 30px;
     }
 
-    .user h4 {
-        font-size: 0.6rem;
-    }
 }
+
+.input {
+    border: 3px solid #97A265;
+    border-radius: 10px;
+    padding: 8px;
+    outline: none;
+    font-family: 'poppins-light';
+    width: 100%;
+}
+
+.input:focus {
+    border-color: #97A265;
+    box-shadow: 0 0 5px rgba(151, 162, 101, 0.5);
+}
+>>>>>>> 3b4b43fd84f39f8ea909c0c05bf27e46bc5c4863

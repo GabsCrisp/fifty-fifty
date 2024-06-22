@@ -19,19 +19,19 @@
 
 body,
 html {
-    height: 100%;
+    font-family: 'poppins-bold';
     margin: 0;
     background-color: #FBF9F1;
 }
 
 main {
     display: flex;
-    height: 90%;
+    height: 90vh;
 }
 
 footer,
 header {
-    height: 5%;
+    height: 5vh;
     background-color: #43766C;
     font-family:"poppins-light";
     font-size: 0.8rem;
@@ -43,6 +43,7 @@ header {
 footer h3 {
     margin: 0;
     text-align: center;
+    color: white;
 }
 
 .logo {
@@ -71,7 +72,6 @@ footer h3 {
 section {
     width: 50%;
 }
-
 .registro {
     display: flex;
     flex-direction: column;
@@ -143,9 +143,10 @@ h3 {
     border: none;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     justify-content: center;
+    padding: 0.8em;
 }
 
-.boton_iniciarsesion a h3 {
+.boton_iniciarsesion h3 {
     text-decoration: none;
     color: white;
     font-family: 'poppins-bold';
@@ -157,7 +158,11 @@ form label {
     text-align: left;
     font-family: 'poppins-light';
 }
-
+#iniciosesion:disabled 
+{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 @media (max-width: 800px) {
 
     .imagen {

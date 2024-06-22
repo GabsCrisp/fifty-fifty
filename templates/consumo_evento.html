@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block css_principal %}{% endblock %}
+{% block title %}Consumo evento{% endblock %}
+
+{% block head %}
+<div class="user">
+  <img id="evento_imagen" src="static/logos/evento.svg" alt="">
+  <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
+  <form action="/logout">
+    <button type="submit">Log out</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="static/styles_consumo_evento.css">
+{% endblock %}
+
+{% block content %}
+<h1>Nombre_evento</h1>
+<main>
+  <section class="product-fetches">
+    <div class="product-info">
+      <form class="product-info-inputs">
+        <div class="container">
+          <label for="participants">Categoria</label>
+          <input type="text" class="input" name="participante">
+        </div>
+        <div class="container">
+          <label for="participants">Producto</label>
+          <input type="text" class="input" name="producto">
+        </div>
+        <div class="container">
+          <label for="participants">Precio unitario</label>
+          <input type="text" class="input" name="precio_unitario">
+        </div>
+        <div class="container">
+          <label for="participants">Cantidad consumida</label>
+          <input type="text" class="input" name="cantidad">
+        </div>
+      </form>
+    </div>
+    <div class="product-info-buttons">
+      <button class="event-end">Agregar consumo</button>
+      <button class="event-end">Agregar producto nuevo</button>
+    </div>
+    </div>
+    <div class="shared-by-products">
+    </div>
+  </section>
+  <section class="summary">
+    <div class="summary-individuals-account">
+    </div>
+
+    </div>
+    <div class="account-summary">
+    </div>
+    </div>
+  </section>
+</main>
+<div class="event-end-container">
+  <button class="event-end">Finalizar evento</button>
+</div>
+{% endblock %}

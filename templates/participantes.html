@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block css_principal %}{% endblock %}
+{% block title %}Participantes{% endblock %}
+
+{% block head %}
+<div class="user">
+    <img id="evento_imagen" src="/static/logos/evento.svg" alt="">
+    <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
+    <form action="/logout">
+        <button type="submit">Log out</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/styles_participantes.css">
+{% endblock %}
+
+
+{% block content %}
+<h1>Nombre_Evento</h1>
+<main>
+    <input type="hidden" id="id_evento" value="{{id_evento}}">
+    <section class="event-container">
+        <div class="event-box">
+            <form onsubmit="crearParticipante(event, this);">
+                <div class="form-group">
+                    <label for="participants">Participantes (nombre usuario o e-mail)</label>
+                    <input type="text" class="input" name="participante">
+                    <input type="hidden" name="tipoUsuario" value="participante">
+                </div>
+
+                <div class="participants">
+                    <button id="add-participants" type="submit">Agregar participantes</button>
+                </div>
+            </form>
+
+            <form onsubmit="crearParticipante(event, this);">
+                <div class="form-group">
+                    <label for="invited">Invitados(nombre)</label>
+                    <input type="text" id="invited" name="participante" class="input">
+                    <input type="hidden" name="tipoUsuario" value="invitado">
+                </div>
+                <div class="participants">
+                    <button id="add-participants" type="submit" >Agregar invitado</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <div class="vertical-line"></div>
+    <section class="participants-list">
+        <h2>Participantes:</h2>
+        <ul>
+            {% for record in rows %}
+            <li>{{record[3]}} <span class="remove">x</span></li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
+<div class="event-div">
+    <button class="go-to-event">Ir al evento</button>
+</div>
+<script src="/static/scripts/eventos.js"></script>
+{% endblock %}

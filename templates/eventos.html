@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block css_principal %}{% endblock %}
+{% block title %}Eventos{% endblock %}
+
+{% block head %}
+<div class="user">
+  <img id="evento_imagen" src="static/logos/evento.svg" alt="">
+  <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
+  <form action="/logout">
+    <button type="submit">Log out</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="static/styles_eventos.css">
+{% endblock %}
+
+{% block content %}
+<main class="event-container">
+  {% for record in rows %}
+  <div class="card w-75" onclick="irEvento('{{record[1]}}')">
+    <div class="card-body">
+      {{record[0]}}
+      <h5>Creado por: usuario_creador</h5>
+    </div>
+  </div>
+  {% endfor %}
+  {% if not rows %}
+  <div class="no-events-message">
+    <p>Oops, no hay eventos registrados aún.</p>
+    <p>¡Toca <span class="plus-icon">+</span>para crear un nuevo evento!</p>
+  </div>
+  {% endif %}
+  <div class="add-button" onclick="changeColor()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <span>+</span>
+  </div>
+</main>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear un evento</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="crear-evento">
+          <input type="text" class="input" name="nombre_evento" id="nombre_evento" placeholder="e.g nombre_de_evento"
+            required minlength="5">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn wrong-button" data-bs-dismiss="modal">Descartar</button>
+        <button type="submit" class="btn right-button" form="crear-evento">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../static/scripts/eventos.js"></script>
+{% endblock %}
