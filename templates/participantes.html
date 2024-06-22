@@ -4,7 +4,7 @@
 
 {% block head %}
 <div class="user">
-    <img id="evento_imagen" src="static/logos/evento.svg" alt="">
+    <img id="evento_imagen" src="/static/logos/evento.svg" alt="">
     <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
     <form action="/logout">
         <button type="submit">Log out</button>
@@ -20,9 +20,10 @@
 {% block content %}
 <h1>Nombre_Evento</h1>
 <main>
+    <input type="hidden" id="id_evento" value="{{id_evento}}">
     <section class="event-container">
         <div class="event-box">
-            <form method="post">
+            <form onsubmit="crearParticipante(event, this);">
                 <div class="form-group">
                     <label for="participants">Participantes (nombre usuario o e-mail)</label>
                     <input type="text" class="input" name="participante">
@@ -30,18 +31,18 @@
                 </div>
 
                 <div class="participants">
-                    <button id="add-participants">Agregar participantes</button>
+                    <button id="add-participants" type="submit">Agregar participantes</button>
                 </div>
             </form>
 
-            <form method="post">
+            <form onsubmit="crearParticipante(event, this);">
                 <div class="form-group">
                     <label for="invited">Invitados(nombre)</label>
                     <input type="text" id="invited" name="participante" class="input">
                     <input type="hidden" name="tipoUsuario" value="invitado">
                 </div>
                 <div class="participants">
-                    <button id="add-participants">Agregar invitado</button>
+                    <button id="add-participants" type="submit" >Agregar invitado</button>
                 </div>
             </form>
         </div>
@@ -59,4 +60,5 @@
 <div class="event-div">
     <button class="go-to-event">Ir al evento</button>
 </div>
+<script src="/static/scripts/eventos.js"></script>
 {% endblock %}

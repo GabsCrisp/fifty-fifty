@@ -5,8 +5,9 @@ from flask import jsonify, render_template
 
 def get_detalle_evento(db, idEvento, request, conn):
     if request.method == "POST":
-        tipo_usuario = request.form.get("tipoUsuario")
-        participante = request.form.get("participante")
+        respuesta_json = request.get_json()
+        tipo_usuario = respuesta_json["tipoUsuario"]
+        participante = respuesta_json["participante"]
         if tipo_usuario == "invitado":
             db.execute(
                 "INSERT INTO participantes_evento(id_evento,nombre_participante) values(?,?)", (idEvento, participante))
@@ -41,4 +42,4 @@ def get_detalle_evento(db, idEvento, request, conn):
         "SELECT * FROM participantes_evento WHERE id_evento = ?", (idEvento,)
     ).fetchall()
 
-    return render_template("participantes.html", rows=rows)
+    return render_template("participantes.html", rows=rows, id_evento = idEvento)

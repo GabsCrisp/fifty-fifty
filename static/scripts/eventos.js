@@ -2,10 +2,12 @@ const form = document.getElementById("crear-evento");
 
 // linea 4 y 5 hacen la misma cosa 
 // form.addEventListener("submit",  (e) => { e.preventDefault(); })
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    crearEvento();
-});
+if (form) {
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // evita que la pagina recargue
+        crearEvento();
+    });
+}
 
 function crearEvento() {
     // Obtener nombre de evento
@@ -24,35 +26,61 @@ function crearEvento() {
     })
         .then((response) => response.json())
         .then((data) => {
-            if (data['status'] == 'success') {
-                Swal.fire({
-                    title: data['message'],
-                    text: "",
-                    icon: "success",
-                })
-                    .then(function () {
+            mostrarMensaje(data['status'], data['message'], data['redirect']);
+        });
+}
 
-                        window.location = data['redirect'];
-                    })
-                //sessionStorage.setItem('loggedIn', 'true')
+function crearParticipante(event, form) {
+    event.preventDefault();
 
-            }
-            else {
-                Swal.fire({
-                    title: "Occurió un error",
-                    text: "",
-                    icon: "error",
-                })
-                    .then(function () {
-
-                        window.location = data['redirect'];
-                    })
-            }
-        })
-
+    const nombreParticipante = form.querySelector("input[name='participante']")
+    const usuarioHidden = form.querySelector("input[name='tipoUsuario']")
+    const idEvento = document.getElementById("id_evento").value
+    const info_usuario = {
+        "participante": nombreParticipante.value,
+        "tipoUsuario": usuarioHidden.value
+    };
+    fetch(
+        "/eventos/" + idEvento, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(info_usuario)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            mostrarMensaje(data['status'], data['message'], data['redirect']);
+        });
 
 }
 
+
 function irEvento(idEvento) {
     location.href = 'eventos/' + idEvento;
+}
+
+function mostrarMensaje(status, message, redirect) {
+    if (status == 'success') {
+        Swal.fire({
+            title: message,
+            text: "",
+            icon: "success",
+        })
+            .then(function () {
+
+                window.location = redirect;
+            })
+    }
+    else {
+        Swal.fire({
+            title: "Occurió un error",
+            text: message,
+            icon: "error",
+        })
+            .then(function () {
+
+                window.location = redirect;
+            })
+    }
 }
