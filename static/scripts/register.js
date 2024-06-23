@@ -120,7 +120,7 @@ function chequeo_password()
 {
     if(!regex_password.test(password.value))
         {
-            let mensaje = "La contraseña debe tener por lo menos 8 caracteres y un símbolo"
+            let mensaje = "La contraseña debe tener más de 8 caracteres y un símbolo"
             h6.innerText = mensaje;
             password.parentNode.insertBefore(h6, password.nextSibling)
             return false
