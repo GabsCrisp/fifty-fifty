@@ -14,6 +14,7 @@
 }
 
 body {
+    overflow-x: hidden;
     margin: 0;
     font-family: 'poppins-light';
     background-color: #FBF9F1;
@@ -154,54 +155,57 @@ h3 {
 }
 
 /*Vista general de usuario*/
-main{
+main {
     height: 60vh;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-h1{
+h1 {
     margin-bottom: 0.6em;
 }
-    
-.inputs
-{
+
+.inputs {
     width: 70%;
 }
-.info{
+
+.info {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 1em;
 }
-.consumos{
+
+.consumos {
     display: flex;
     flex: row;
     justify-content: space-evenly;
 }
-.add
-{
+
+.add {
     margin-left: 1em;
     font-size: 0.8rem;
 }
-.container-label{
+
+.container-label {
     display: flex;
     flex-direction: column;
+    padding: 1em;
 }
 
-.container-label label{
+.container-label label {
     font-size: 1em;
     font-family: "poppins-bold";
-    background-color: ;
+    text-align: inherit;
 }
 
-.shared-by{
+.shared-by {
     text-align: center;
     font-size: 1em;
     font-family: "poppins-bold";
 }
-    
-.container-label .input{
+
+.container-label .input {
     border: 3px solid #97A265;
     border-radius: 10px;
     padding: 8px;
@@ -210,13 +214,14 @@ h1{
     font-family: 'poppins-light';
     width: 90%;
 }
-.botones_consumo
-{
+
+.botones_consumo {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
-.botones_consumo button{
+
+.botones_consumo button {
     margin-top: 1em;
     width: auto;
     background-color: #43766C;
@@ -230,20 +235,19 @@ h1{
     font-family: 'poppins-bold';
     top: 1em;
 }
-.participants
-{
+
+.participants {
     width: 30%;
 }
 
-.resumenes
-{
+.resumenes {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-evenly;
 }
-.participantes_resumen
-{
+
+.participantes_resumen {
     background-color: #e5e9c8;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -251,23 +255,22 @@ h1{
     width: 35%;
 }
 
-.cuenta_resumen
-{
+.cuenta_resumen {
     background-color: #e5e9c8;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0.5em;
     width: 35%;
 }
-.button-container
-{
-    display:flex;
+
+.button-container {
+    display: flex;
     justify-content: center;
     align-items: center;
 
 }
-.finalizar-evento
-{
+
+.finalizar-evento {
     margin-top: 1em;
     width: 30%;
     background-color: #43766C;
@@ -282,31 +285,171 @@ h1{
     top: 1em;
     font-size: 1.1em;
 }
-.resumenes h2{
+
+.resumenes h2 {
     font-size: 1em;
 }
-.nombre_participante, .participants
-{
+
+.nombre_participante,
+.participants {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.nombre_participante{
+.nombre_participante {
     margin-left: 1em;
 }
 
-.participants
-{
+.participants {
     flex-direction: column;
     gap: 0.5em;
 }
-.participants-checkbox
-{
+
+.participants-checkbox {
     display: flex;
     align-items: flex-start;
     border-radius: 10px;
     border: 3px solid #43766C;
     width: 80%;
     gap: 1em;
+}
+
+@media(max-width: 700px) {
+
+    .consumos {
+        flex-direction: column;
+    }
+
+    .participants {
+        margin-right: 1em;
+        justify-content: center;
+        gap: 2em;
+        border: 2px solid rgb(193, 161, 161);
+        height: 85%;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .participants-checkbox {
+        height: 50%;
+        gap: 1em;
+        justify-content: center;
+    }
+
+    .botones_consumo {
+        width: 100vw;
+
+    }
+
+    main {
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    .button-container {
+        margin-bottom: 1em;
+    }
+
+    .finalizar-evento {
+        width: 80%;
+    }
+
+    .resumenes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .resumenes div {
+        height: 50%;
+        width: 90%;
+    }
+
+}
+
+
+@media(max-width: 430px) {
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    form button {
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+        border: 1px solid transparent;
+        border-radius: 1em;
+        padding: 0.4em 2em 0.4em 2em;
+        font-family: 'poppins-bold';
+        font-size: 1em;
+        transition: 1s;
+    
+    }
+    .consumos {
+        flex-direction: column;
+    }
+
+    .participants {
+
+        margin-right: 1em;
+        justify-content: center;
+        gap: 2em;
+        border: 2px solid rgb(193, 161, 161);
+        height: 85%;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
+        width: 50%;
+    }
+
+    .participants-checkbox {
+        height: 50%;
+        gap: 1em;
+        justify-content: center;
+    }
+
+    .botones_consumo button {
+        margin-top: 1em;
+        width: 40%;
+        background-color: #43766C;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        justify-content: center;
+        padding: 0.3em;
+        text-decoration: none;
+        color: white;
+        font-family: 'poppins-bold';
+        top: 1em;
+
+    }
+
+    main {
+        min-height: 100vh;
+    }
+
+    .button-container {
+        margin-bottom: 1em;
+        gap: 1em;
+    }
+
+    .finalizar-evento {
+        width: 80%;
+    }
+
+    .resumenes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .resumenes div {
+        height: 50%;
+        width: 90%;
+    }
+    .inputs
+    {
+        text-align: start;
+        width: 50%;
+    }
+
 }
