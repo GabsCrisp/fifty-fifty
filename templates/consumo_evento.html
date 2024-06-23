@@ -19,51 +19,31 @@
 {% block content %}
 <h1>Nombre_evento</h1>
 <main>
-  <main>
-    <form>
-        <div class="form-group">
-            <label for="categoria">Categoría</label>
-            <input type="text" id="categoria" placeholder="Cantidad" class = "input">
+  <section class="info">
+    <div class="inputs">
+        <div class="consumos">
+            <label for="">categoria</label>
+            <input type="text">
+            <label for="">producto</label>
+            <input type="text">
+            <label for="">precio unitario</label>
+            <input type="text">
+            <label for="">ejemplo</label>
+            <input type="text">
         </div>
-        <div class="form-group">
-            <label for="producto">Producto</label>
-            <input type="text" id="producto" placeholder="Escribe un producto" class = "input">
+        <div class="botones_consumo">
+
         </div>
-        <div class="form-group">
-            <label for="precio">Precio unitario</label>
-            <input type="text" id="precio" placeholder="C$" class = "input">
-        </div>
-        <div class="form-group">
-            <label for="cantidad">Cantidad consumida</label>
-            <input type="text" id="cantidad" placeholder="Cantidad" class = "input">
-        </div>
-        <div class="form-group">
-            <label>Compartido por:</label>
-            <div class="radio-group">
-                <label><input type="radio" name="compartido" value="elo"> Elo</label>
-                <label><input type="radio" name="compartido" value="adi"> Adi</label>
-                <label><input type="radio" name="compartido" value="gabs"> Gabs</label>
-            </div>
-        </div>
-        <button type="button" class="btn agregar-consumo">Agregar consumo</button>
-        <button type="button" class="btn agregar-producto">Agregar producto nuevo</button>
-    </form>
-    <section class="participants">
-        <h3>Participantes:</h3>
-        <ul>
-            <li>Elote_quemuele 0 C$</li>
-            <li>Adilia_quesillo 0 C$</li>
-            <li>Oneyda_DBdeveloper 0 C$</li>
-        </ul>
-    </section>
-    <section class="summary">
-        <h3>Resumen:</h3>
-        <div class="summary-content">
-            <span>Total:</span>
-            <span>C/persona:</span>
-        </div>
-        <p>Consumido por Usuario1, Usuario2, Usuario3</p>
-    </section>
-    <button class="btn finalizar-evento">Finalizar evento</button>
+    </div>
+    <div class="participants">
+
+    </div>
+  </section>
+  <section class="resumenes">
+
+  </section>
 </main>
+<div class="button-container">
+
+</div>
 {% endblock %}
