@@ -172,7 +172,10 @@ form label {
     opacity: 0.5;
     cursor: not-allowed;
 }
-
+h6 
+{
+    color: rgb(180, 79, 79);
+}
 @media (max-width: 800px) {
 
     .imagen {

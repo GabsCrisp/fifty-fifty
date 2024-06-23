@@ -6,9 +6,15 @@ let confirmpassword = document.getElementById("confirmpassword");
 let email = document.getElementById("email");
 
 //validar email correctamente
-const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const regex_email = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+//validacion password
+const regex_password = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.{9,})/;
 //Diccionario que va a almacenar toda la informacion que se va a enviar al backend
 let info = {};
+
+let h6 = document.createElement("h6");
+password.addEventListener("input", chequeo_password)
 
 //previene no recargar el formulario
 form.addEventListener("submit", function (e) {
@@ -31,7 +37,7 @@ function chequeo_input() {
         }
 
     }
-    if (contador == inputs.length) {
+    if (contador == inputs.length && chequeo_password()) {
 
         registro.disabled = false;
     }
@@ -42,7 +48,7 @@ function chequeo_input() {
 function confirmacion() {
     //regex permite validacion de inputs 
     //es una herramienta que ya es parte de js
-    if (!regex.test(email.value)) {
+    if (!regex_email.test(email.value)) {
         Swal.fire({
             title: "El formato del correo no es válido",
             text: "",
@@ -108,4 +114,20 @@ function confirmacion() {
         });
         return;
     }
+}
+
+function chequeo_password() 
+{
+    if(!regex_password.test(password.value))
+        {
+            let mensaje = "La contraseña debe tener por lo menos 8 caracteres y un símbolo"
+            h6.innerText = mensaje;
+            password.parentNode.insertBefore(h6, password.nextSibling)
+            return false
+        }
+        else 
+        {
+            h6.remove()
+            return true
+        }
 }
