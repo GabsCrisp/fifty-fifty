@@ -52,7 +52,7 @@
         <h2>Participantes:</h2>
         <ul>
             {% for record in rows %}
-            <li>{{record[3]}} <span class="remove">x</span></li>
+            <li> <span id="username">{{record[3]}}</span> <span class="remove" id="remove">x</span></li>
             {% endfor %}
         </ul>
     </section>
