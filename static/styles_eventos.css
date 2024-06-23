@@ -178,12 +178,20 @@ a {
     font-family: 'poppins-bold';
     font-size: 1.2em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+    cursor: pointer;
+    transition: 0.5s;
 }
-
+.card-body:hover 
+{
+    transform: scale(1.05);
+}
+.card-body:hover h4
+{
+    color: white;
+}
 h5{
     margin-top: 1em;
-    font-size: 0.5em;
+    font-size: 0.9rem;
     text-align: left;
     font-family: 'poppins-light';
 }
