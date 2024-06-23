@@ -154,4 +154,12 @@ def detalle_evento(idEvento):
 def remover_participantes():
     return get_remover_participantes(db, request,conn, redirect)
 
-
+@app.route("/buscar_user", methods=["POST"])
+@login_required
+def buscar_user():
+    user = request.get_json()
+    u = db.execute("SELECT usuario from usuarios WHERE usuario LIKE ?", ("%" + user["username"] + "%",)).fetchall()
+    usuarios = []
+    for user in u:
+        usuarios.append(user[0])
+    return jsonify(usuarios)

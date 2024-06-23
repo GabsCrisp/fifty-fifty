@@ -26,23 +26,24 @@
             <form onsubmit="crearParticipante(event, this);">
                 <div class="form-group">
                     <label for="participants">Participantes (nombre usuario o e-mail)</label>
-                    <input type="text" class="input" name="participante">
+                    <input type="text" class="input" name="participante" id="participants" list="users" autocomplete="off"> 
+                    <datalist id="users"></datalist>
                     <input type="hidden" name="tipoUsuario" value="participante">
                 </div>
 
                 <div class="participants">
-                    <button id="add-participants" type="submit">Agregar participantes</button>
+                    <button class="add-participants" type="submit">Agregar participantes</button>
                 </div>
             </form>
 
             <form onsubmit="crearParticipante(event, this);">
                 <div class="form-group">
                     <label for="invited">Invitados(nombre)</label>
-                    <input type="text" id="invited" name="participante" class="input">
+                    <input type="text" id="invited" name="participante" class="input" autocomplete="off">
                     <input type="hidden" name="tipoUsuario" value="invitado">
                 </div>
                 <div class="participants">
-                    <button id="add-participants" type="submit">Agregar invitado</button>
+                    <button class="add-participants" type="submit" id="button_invitado">Agregar invitado</button>
                 </div>
             </form>
         </div>

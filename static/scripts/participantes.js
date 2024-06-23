@@ -1,10 +1,49 @@
 const remove = document.getElementsByClassName("remove");
 const idEvento = document.getElementById("id_evento").value;
+const button_invitado = document.getElementById("button_invitado");
+const invited = document.getElementById("invited");
+const participants = document.getElementById("participants");
+
+button_invitado.disabled = true;
+invited.addEventListener("input", ()=>{
+    if(invited.value.length > 0)
+        {
+            button_invitado.disabled = false;
+        }
+})
+
+
+participants.addEventListener("input", ()=> {
+    const dataList = document.getElementById("users");
+    dataList.innerHTML = ""
+    username = {"username": participants.value};
+    if(participants.value.length > 0)
+    {
+        fetch(
+            "/buscar_user", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(username)
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                data.forEach(item => {
+                    const option = document.createElement("option");
+                    option.value = item; 
+                    dataList.appendChild(option)
+                })
+    
+            }); 
+    }
+
+})
 
 for (let i = 0; i < remove.length; i++) {
     remove[i].addEventListener("click", removeParticipants)
 }
-
 
 function crearParticipante(event, form) {
     event.preventDefault();

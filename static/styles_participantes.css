@@ -43,6 +43,14 @@ form button
     transition: 1s;
 
 }
+#button_invitado:disabled
+{
+    opacity: 0.5;
+}
+datalist
+{
+    background-color: pink;
+}
 form button:hover 
 {
     transform: scale(1.1);
@@ -185,16 +193,24 @@ label {
 }
 
 .form-group {
+    position: relative;
     margin-bottom: 1em;
 }
 
+.form-group::after {
+    position: absolute;
+    content: "+";
+    right: 2%;
+    bottom: 10%;
+    font-size: 1.2rem;
+}
 .participants{
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 
-#add-participants {
+.add-participants {
     width: auto;
     border: none;
     background-color: #43766C;
@@ -324,7 +340,7 @@ label {
     {
         height: 80px;
     }
-    #add-participants 
+    .add-participants 
     {
         font-size: 1.5rem;
     }
