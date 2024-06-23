@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request, redirect, jsonify, session
+from flask import Flask, render_template, request, redirect, jsonify, session, flash
 from flask_session import Session
 from helpers import login_required, session_activate
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
-from services import get_detalle_evento
+from services import get_detalle_evento, get_remover_participantes
 
 conn = sqlite3.connect("fiftyfifty.db", check_same_thread=False)
 db = conn.cursor()
@@ -148,3 +148,10 @@ def usuario():
 @login_required
 def detalle_evento(idEvento):
     return get_detalle_evento(db, idEvento, request,conn)
+
+@app.route("/remover_participantes", methods=["POST"])
+@login_required
+def remover_participantes():
+    return get_remover_participantes(db, request,conn, redirect)
+
+

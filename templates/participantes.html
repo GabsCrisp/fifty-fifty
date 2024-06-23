@@ -18,7 +18,7 @@
 
 
 {% block content %}
-<h1>Nombre_Evento</h1>
+<h1>{{nombre_egit vento}}</h1>
 <main>
     <input type="hidden" id="id_evento" value="{{id_evento}}">
     <section class="event-container">
@@ -42,7 +42,7 @@
                     <input type="hidden" name="tipoUsuario" value="invitado">
                 </div>
                 <div class="participants">
-                    <button id="add-participants" type="submit" >Agregar invitado</button>
+                    <button id="add-participants" type="submit">Agregar invitado</button>
                 </div>
             </form>
         </div>
@@ -52,7 +52,7 @@
         <h2>Participantes:</h2>
         <ul>
             {% for record in rows %}
-            <li>{{record[3]}} <span class="remove">x</span></li>
+            <li> <span class ="username">{{record[3]}}</span> <span class ="id_usuarios">{{record[0]}}</span> <span class="remove">x</span></li>
             {% endfor %}
         </ul>
     </section>

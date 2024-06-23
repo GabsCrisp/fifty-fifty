@@ -228,7 +228,10 @@ label {
     color: red;
     cursor: pointer;
 }
-
+.id_usuarios
+{
+    visibility: hidden;
+}
 .go-to-event {
     background-color: #43766C;
     border-radius: 10px;

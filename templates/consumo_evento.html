@@ -19,46 +19,51 @@
 {% block content %}
 <h1>Nombre_evento</h1>
 <main>
-  <section class="product-fetches">
-    <div class="product-info">
-      <form class="product-info-inputs">
-        <div class="container">
-          <label for="participants">Categoria</label>
-          <input type="text" class="input" name="participante">
+  <main>
+    <form>
+        <div class="form-group">
+            <label for="categoria">Categoría</label>
+            <input type="text" id="categoria" placeholder="Cantidad" class = "input">
         </div>
-        <div class="container">
-          <label for="participants">Producto</label>
-          <input type="text" class="input" name="producto">
+        <div class="form-group">
+            <label for="producto">Producto</label>
+            <input type="text" id="producto" placeholder="Escribe un producto" class = "input">
         </div>
-        <div class="container">
-          <label for="participants">Precio unitario</label>
-          <input type="text" class="input" name="precio_unitario">
+        <div class="form-group">
+            <label for="precio">Precio unitario</label>
+            <input type="text" id="precio" placeholder="C$" class = "input">
         </div>
-        <div class="container">
-          <label for="participants">Cantidad consumida</label>
-          <input type="text" class="input" name="cantidad">
+        <div class="form-group">
+            <label for="cantidad">Cantidad consumida</label>
+            <input type="text" id="cantidad" placeholder="Cantidad" class = "input">
         </div>
-      </form>
-    </div>
-    <div class="product-info-buttons">
-      <button class="event-end">Agregar consumo</button>
-      <button class="event-end">Agregar producto nuevo</button>
-    </div>
-    </div>
-    <div class="shared-by-products">
-    </div>
-  </section>
-  <section class="summary">
-    <div class="summary-individuals-account">
-    </div>
-
-    </div>
-    <div class="account-summary">
-    </div>
-    </div>
-  </section>
+        <div class="form-group">
+            <label>Compartido por:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="compartido" value="elo"> Elo</label>
+                <label><input type="radio" name="compartido" value="adi"> Adi</label>
+                <label><input type="radio" name="compartido" value="gabs"> Gabs</label>
+            </div>
+        </div>
+        <button type="button" class="btn agregar-consumo">Agregar consumo</button>
+        <button type="button" class="btn agregar-producto">Agregar producto nuevo</button>
+    </form>
+    <section class="participants">
+        <h3>Participantes:</h3>
+        <ul>
+            <li>Elote_quemuele 0 C$</li>
+            <li>Adilia_quesillo 0 C$</li>
+            <li>Oneyda_DBdeveloper 0 C$</li>
+        </ul>
+    </section>
+    <section class="summary">
+        <h3>Resumen:</h3>
+        <div class="summary-content">
+            <span>Total:</span>
+            <span>C/persona:</span>
+        </div>
+        <p>Consumido por Usuario1, Usuario2, Usuario3</p>
+    </section>
+    <button class="btn finalizar-evento">Finalizar evento</button>
 </main>
-<div class="event-end-container">
-  <button class="event-end">Finalizar evento</button>
-</div>
 {% endblock %}

@@ -1,4 +1,10 @@
 const form = document.getElementById("crear-evento");
+const remove = document.getElementsByClassName("remove");
+const idEvento = document.getElementById("id_evento").value;
+
+for (let i = 0; i < remove.length; i++) {
+    remove[i].addEventListener("click", removeParticipants)
+}
 
 // linea 4 y 5 hacen la misma cosa 
 // form.addEventListener("submit",  (e) => { e.preventDefault(); })
@@ -9,6 +15,7 @@ if (form) {
     });
 }
 
+// funciones
 function crearEvento() {
     // Obtener nombre de evento
     const inputNombreEvento = document.getElementById("nombre_evento");
@@ -35,7 +42,6 @@ function crearParticipante(event, form) {
 
     const nombreParticipante = form.querySelector("input[name='participante']")
     const usuarioHidden = form.querySelector("input[name='tipoUsuario']")
-    const idEvento = document.getElementById("id_evento").value
     const info_usuario = {
         "participante": nombreParticipante.value,
         "tipoUsuario": usuarioHidden.value
@@ -54,7 +60,6 @@ function crearParticipante(event, form) {
         });
 
 }
-
 
 function irEvento(idEvento) {
     location.href = 'eventos/' + idEvento;
@@ -83,4 +88,27 @@ function mostrarMensaje(status, message, redirect) {
                 window.location = redirect;
             })
     }
+}
+
+function removeParticipants() {
+    //parentNode permite saber el padre de un hijo en html
+    //children nos retorna un arreglo de todos los hijos del padre
+    const children = this.parentNode.children;
+    const username = children[0].innerHTML;
+    const id_participante_evento = children[1].innerHTML;
+
+    info_borrada = { "idEvento": idEvento, "username": username, "id_participante_evento": id_participante_evento }
+    fetch(
+        "/remover_participantes", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(info_borrada)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            mostrarMensaje(data['status'], data['message'], data['redirect']);
+        });
+
 }

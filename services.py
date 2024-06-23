@@ -37,9 +37,18 @@ def get_detalle_evento(db, idEvento, request, conn):
         response = {"status": "success", "redirect":  "/eventos/" +
                     idEvento, "message": "¡Participante registrado!"}
         return jsonify(response)
-
+    #get
     rows = db.execute(
         "SELECT * FROM participante_evento WHERE id_evento = ?", (idEvento,)
     ).fetchall()
+    nombre_evento = db.execute("SELECT nombre_evento FROM eventos WHERE id_evento = ?", (idEvento,)).fetchone()[0]
+    return render_template("participantes.html", rows=rows, id_evento = idEvento, nombre_evento = nombre_evento)
 
-    return render_template("participantes.html", rows=rows, id_evento = idEvento)
+def get_remover_participantes(db, request, conn, redirect):
+    remove = request.get_json()
+    print(remove)
+    db.execute("DELETE FROM participante_evento WHERE id_participante_evento = ? AND id_evento = ?", (remove["id_participante_evento"],remove["idEvento"]))
+    conn.commit()
+    response = {"status": "success","message": remove["username"] + " ha sido eliminado/a del evento", "redirect":  "/eventos/" + remove["idEvento"]}
+    return jsonify(response)
+    
