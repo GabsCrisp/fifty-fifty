@@ -109,9 +109,15 @@ def register():
         return jsonify(response)
 
 
-@app.route("/consumo_evento")
-def consumo_evento():
-    return render_template("consumo_evento.html")
+@app.route("/eventos/<idEvento>/consumo_evento")
+def consumo_evento(idEvento):
+    rows = db.execute(
+    "SELECT * FROM participante_evento WHERE id_evento = ?", (idEvento,)
+    ).fetchall()
+    nombre_evento = db.execute("SELECT nombre_evento FROM eventos WHERE id_evento = ?", (idEvento,)).fetchone()[0]
+    lista_categoria = db.execute("SELECT * FROM categorias").fetchall()
+
+    return render_template("consumo_evento.html",rows=rows, id_evento = idEvento, nombre_evento = nombre_evento,lista_categoria = lista_categoria)
 
 
 @app.route("/eventos", methods=["GET", "POST"])

@@ -64,7 +64,12 @@
     </section>
 </main>
 <div class="event-div">
-    <button class="go-to-event">Ir al evento</button>
+    {% if rows %}
+    <form action="/eventos/{{id_evento}}/consumo_evento" >
+        <button class="go-to-event">Ir al evento</button>
+    </form>
+    {% endif %}
+
 </div>
 <script src="/static/scripts/participantes.js"></script>
 {% endblock %}

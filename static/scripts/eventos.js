@@ -59,9 +59,3 @@ function mostrarMensaje(status, message, redirect) {
             })
     }
 }
-
-function eliminarParticipante(span){
-    const participante = span.parentElement;
-    const id = participante.getAttribute('data-id');
-    participante.remove();
-}

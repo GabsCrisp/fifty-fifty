@@ -4,7 +4,7 @@
 
 {% block head %}
 <div class="user">
-    <img id="evento_imagen" src="static/logos/evento.svg" alt="">
+    <img id="evento_imagen" src="/static/logos/evento.svg" alt="">
     <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
     <form action="/logout">
         <button type="submit">Log out</button>
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="static/styles_consumo_evento.css">
+<link rel="stylesheet" href="/static/styles_consumo_evento.css">
 {% endblock %}
 
 {% block content %}
@@ -24,7 +24,11 @@
             <div class="consumos">
                 <div class="container-label">
                     <label for="">Categoria</label>
-                    <input type="text" class =  "input">
+                    <select name="categoria" class="input">
+                        {% for record in lista_categoria %}
+                        <option value="{{record[0]}}">{{record[1]}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="container-label">
                     <label for="">Producto</label>
@@ -45,20 +49,14 @@
             </div>
         </div>
         <div class="participants">
-            <label for="" class="shared-by">Compartido por: <span class="add"><a href="">Agregar</a></span></label>
+            <label for="" class="shared-by">Compartido por: <span class="add"><a href="/eventos/{{id_evento}}">Agregar</a></span></label>
             <form class = "participants-checkbox">
+                {% for record in rows%}
                 <div class = "nombre_participante">
-                    <input type="radio">
-                    <label for="">Adilia</label>
+                    <input type="checkbox" id="{{record[0]}}"  name="participantes" value="{{record[0]}}">
+                    <label for="{{record[0]}}">{{record[3]}}</label>
                 </div>
-                <div class = "nombre_participante">
-                    <input type="radio">
-                    <label for="">Elo</label>
-                </div>
-                <div class = "nombre_participante">
-                    <input type="radio"> 
-                    <label for="">Gabs</label>
-                </div>
+                {% endfor %}
             </form>
         </div>
     </section>
