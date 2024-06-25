@@ -163,6 +163,11 @@ h4
     font-family: 'poppins-light';
     text-align: center;
 }
+#chequeo_password
+{
+    color: rgb(180, 79, 79);
+    font-size: 0.8rem;
+}
 @media(max-width:600px)
 {
     .contenedor-registro

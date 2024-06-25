@@ -4,11 +4,11 @@
 
 {% block head %}
 <div class="user">
-  <img id="evento_imagen" src="static/logos/evento.svg" alt="">
-  <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
-  <form action="/logout">
-    <button type="submit">Log out</button>
-  </form>
+    <img id="evento_imagen" src="static/logos/evento.svg" alt="">
+    <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
+    <form action="/logout">
+        <button type="submit">Log out</button>
+    </form>
 </div>
 {% endblock %}
 
@@ -19,46 +19,63 @@
 {% block content %}
 <h1>Nombre_evento</h1>
 <main>
-  <section class="product-fetches">
-    <div class="product-info">
-      <form class="product-info-inputs">
-        <div class="container">
-          <label for="participants">Categoria</label>
-          <input type="text" class="input" name="participante">
+    <section class="info">
+        <div class="inputs">
+            <div class="consumos">
+                <div class="container-label">
+                    <label for="">Categoria</label>
+                    <input type="text" class =  "input">
+                </div>
+                <div class="container-label">
+                    <label for="">Producto</label>
+                    <input type="text" class =  "input">
+                </div>
+                <div class="container-label">
+                    <label for="">Precio unitario</label>
+                    <input type="text" class ="input">
+                </div>
+                <div class="container-label">
+                    <label for="">Cantidad</label>
+                    <input type="text" class = "input">
+                </div>
+            </div>
+            <div class="botones_consumo">
+                <button>Agregar consumo</button>
+                <button>Agregar producto nuevo</button>
+            </div>
         </div>
-        <div class="container">
-          <label for="participants">Producto</label>
-          <input type="text" class="input" name="producto">
+        <div class="participants">
+            <label for="" class="shared-by">Compartido por: <span class="add"><a href="">Agregar</a></span></label>
+            <form class = "participants-checkbox">
+                <div class = "nombre_participante">
+                    <input type="radio">
+                    <label for="">Adilia</label>
+                </div>
+                <div class = "nombre_participante">
+                    <input type="radio">
+                    <label for="">Elo</label>
+                </div>
+                <div class = "nombre_participante">
+                    <input type="radio"> 
+                    <label for="">Gabs</label>
+                </div>
+            </form>
         </div>
-        <div class="container">
-          <label for="participants">Precio unitario</label>
-          <input type="text" class="input" name="precio_unitario">
+    </section>
+    <section class="resumenes">
+        <div class="participantes_resumen">
+            <h2>Participantes:</h2>
+            <ul>
+            </ul>
         </div>
-        <div class="container">
-          <label for="participants">Cantidad consumida</label>
-          <input type="text" class="input" name="cantidad">
+        <div class = "cuenta_resumen">
+            <h2>Resumen:</h2>
+            <ul>
+            </ul>
         </div>
-      </form>
-    </div>
-    <div class="product-info-buttons">
-      <button class="event-end">Agregar consumo</button>
-      <button class="event-end">Agregar producto nuevo</button>
-    </div>
-    </div>
-    <div class="shared-by-products">
-    </div>
-  </section>
-  <section class="summary">
-    <div class="summary-individuals-account">
-    </div>
-
-    </div>
-    <div class="account-summary">
-    </div>
-    </div>
-  </section>
+    </section>
 </main>
-<div class="event-end-container">
-  <button class="event-end">Finalizar evento</button>
+<div class="button-container">
+    <button class = "finalizar-evento">Finalizar evento</button>
 </div>
 {% endblock %}

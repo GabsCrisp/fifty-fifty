@@ -18,7 +18,7 @@
 
 
 {% block content %}
-<h1>Nombre_Evento</h1>
+<h1>{{nombre_evento}}</h1>
 <main>
     <input type="hidden" id="id_evento" value="{{id_evento}}">
     <section class="event-container">
@@ -26,23 +26,24 @@
             <form onsubmit="crearParticipante(event, this);">
                 <div class="form-group">
                     <label for="participants">Participantes (nombre usuario o e-mail)</label>
-                    <input type="text" class="input" name="participante">
+                    <input type="text" class="input" name="participante" id="participants" list="users" autocomplete="off"> 
+                    <datalist id="users"></datalist>
                     <input type="hidden" name="tipoUsuario" value="participante">
                 </div>
 
                 <div class="participants">
-                    <button id="add-participants" type="submit">Agregar participantes</button>
+                    <button class="add-participants" type="submit">Agregar participantes</button>
                 </div>
             </form>
 
             <form onsubmit="crearParticipante(event, this);">
                 <div class="form-group">
                     <label for="invited">Invitados(nombre)</label>
-                    <input type="text" id="invited" name="participante" class="input">
+                    <input type="text" id="invited" name="participante" class="input" autocomplete="off">
                     <input type="hidden" name="tipoUsuario" value="invitado">
                 </div>
                 <div class="participants">
-                    <button id="add-participants" type="submit" >Agregar invitado</button>
+                    <button class="add-participants" type="submit" id="button_invitado">Agregar invitado</button>
                 </div>
             </form>
         </div>
@@ -53,6 +54,7 @@
         <ul>
             {% for record in rows %}
             <li data-id="{{record[0]}}">{{record[3]}} <span class="remove" onclick="eliminarParticipante(this)">x</span></li>
+            <li> <span class ="username">{{record[3]}}</span> <span class ="id_usuarios">{{record[0]}}</span> <span class="remove">x</span></li>
             {% endfor %}
         </ul>
     </section>
@@ -60,5 +62,5 @@
 <div class="event-div">
     <button class="go-to-event">Ir al evento</button>
 </div>
-<script src="/static/scripts/eventos.js"></script>
+<script src="/static/scripts/participantes.js"></script>
 {% endblock %}

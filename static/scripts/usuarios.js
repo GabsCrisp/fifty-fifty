@@ -9,6 +9,11 @@ let form = document.getElementById("form");
 //Diccionario que va a almacenar toda la informacion que se va a enviar al backend
 let info_contrasena = {};
 
+//validacion password
+const regex_password = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.{9,})/;
+
+password_nueva.addEventListener("input", chequeo_password)
+
 //previene no recargar el formulario
 form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -29,7 +34,7 @@ function chequeo_input() {
         }
 
     }
-    if (contador == inputs.length) {
+    if (contador == inputs.length && chequeo_password()) {
 
         boton_cambiarcontrasena.disabled = false;
     }
@@ -107,4 +112,22 @@ function confirmacion() {
         });
         return;
     }
+}
+let h6 = document.createElement("h6")
+h6.id = "chequeo_password"
+function chequeo_password() 
+{
+
+    if(!regex_password.test(password_nueva.value))
+        {
+            let mensaje = "La contraseña debe tener por lo menos 8 caracteres y un símbolo"
+            h6.innerText = mensaje;
+            password_nueva.parentNode.insertBefore(h6, password_nueva.nextSibling)
+            return false
+        }
+        else 
+        {
+            h6.remove()
+            return true
+        }
 }

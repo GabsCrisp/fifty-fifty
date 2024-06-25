@@ -1,5 +1,4 @@
 const form = document.getElementById("crear-evento");
-
 // linea 4 y 5 hacen la misma cosa 
 // form.addEventListener("submit",  (e) => { e.preventDefault(); })
 if (form) {
@@ -9,6 +8,7 @@ if (form) {
     });
 }
 
+// funciones
 function crearEvento() {
     // Obtener nombre de evento
     const inputNombreEvento = document.getElementById("nombre_evento");

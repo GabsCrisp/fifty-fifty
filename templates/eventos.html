@@ -21,7 +21,9 @@
   {% for record in rows %}
   <div class="card w-75" onclick="irEvento('{{record[1]}}')">
     <div class="card-body">
-      {{record[0]}}
+      <h4>
+        {{record[0]}}
+      </h4>
       <h5>Creado por: usuario_creador</h5>
     </div>
   </div>
