@@ -14,7 +14,7 @@ def get_detalle_evento(db, idEvento, request, conn):
             conn.commit()
         else:
             respuesta = db.execute(
-                "SELECT id FROM usuarios WHERE usuario = ? OR email = ?", (
+                "SELECT id, usuario FROM usuarios WHERE usuario = ? OR email = ?", (
                     participante, participante)
             ).fetchone()
             if not respuesta:
@@ -22,16 +22,18 @@ def get_detalle_evento(db, idEvento, request, conn):
                             idEvento, "message": "Usuario no encontrado"}
                 return jsonify(response)
             id_usuario = respuesta[0]
+            nombre_usuario = respuesta[1]
             respuesta = db.execute(
                 "SELECT id_usuario FROM participante_evento WHERE id_usuario = ? AND id_evento = ?", (
                     id_usuario, idEvento)
             ).fetchone()
+            # Validar si el participante ya existe
             if respuesta:
                 response = {"status": "error", "redirect": "/eventos/" +
                             idEvento, "message": "Participante ya ingresado"}
                 return jsonify(response)
             db.execute(
-                "INSERT INTO participante_evento(id_evento,nombre_participante,id_usuario) values(?,?,?)", (idEvento, participante, id_usuario))
+                "INSERT INTO participante_evento(id_evento,nombre_participante,id_usuario) values(?,?,?)", (idEvento, nombre_usuario, id_usuario))
             conn.commit()
 
         response = {"status": "success", "redirect":  "/eventos/" +

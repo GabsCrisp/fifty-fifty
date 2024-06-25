@@ -52,7 +52,7 @@
         <h2>Participantes:</h2>
         <ul>
             {% for record in rows %}
-            <li>{{record[3]}} <span class="remove">x</span></li>
+            <li data-id="{{record[0]}}">{{record[3]}} <span class="remove" onclick="eliminarParticipante(this)">x</span></li>
             {% endfor %}
         </ul>
     </section>

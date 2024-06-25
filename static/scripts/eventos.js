@@ -52,6 +52,7 @@ function crearParticipante(event, form) {
         .then((data) => {
             mostrarMensaje(data['status'], data['message'], data['redirect']);
         });
+        
 
 }
 
@@ -83,4 +84,10 @@ function mostrarMensaje(status, message, redirect) {
                 window.location = redirect;
             })
     }
+}
+
+function eliminarParticipante(span){
+    const participante = span.parentElement;
+    const id = participante.getAttribute('data-id');
+    participante.remove();
 }
