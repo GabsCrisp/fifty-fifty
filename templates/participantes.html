@@ -26,7 +26,8 @@
             <form onsubmit="crearParticipante(event, this);">
                 <div class="form-group">
                     <label for="participants">Participantes (nombre usuario o e-mail)</label>
-                    <input type="text" class="input" name="participante" id="participants" list="users" autocomplete="off"> 
+                    <input type="text" class="input" name="participante" id="participants" list="users"
+                        autocomplete="off">
                     <datalist id="users"></datalist>
                     <input type="hidden" name="tipoUsuario" value="participante">
                 </div>
@@ -53,8 +54,11 @@
         <h2>Participantes:</h2>
         <ul>
             {% for record in rows %}
-            <li data-id="{{record[0]}}">{{record[3]}} <span class="remove" onclick="eliminarParticipante(this)">x</span></li>
-            <li> <span class ="username">{{record[3]}}</span> <span class ="id_usuarios">{{record[0]}}</span> <span class="remove">x</span></li>
+
+            <li>
+                <span class="username">{{record[3]}}</span>
+                <span class="id_usuarios">{{record[0]}}</span> <span class="remove">x</span>
+            </li>
             {% endfor %}
         </ul>
     </section>
