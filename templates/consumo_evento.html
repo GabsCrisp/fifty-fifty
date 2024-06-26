@@ -19,12 +19,13 @@
 {% block content %}
 <h1>Nombre_evento</h1>
 <main>
+    <form action="/{{id_evento}}/crear_consumo" id="id_form_consumo" method="post"></form>
     <section class="info">
         <div class="inputs">
             <div class="consumos">
                 <div class="container-label">
                     <label for="">Categoria</label>
-                    <select name="categoria" class="input">
+                    <select name="categoria" class="input" form="id_form_consumo">
                         {% for record in lista_categoria %}
                         <option value="{{record[0]}}">{{record[1]}}</option>
                         {% endfor %}
@@ -32,28 +33,32 @@
                 </div>
                 <div class="container-label">
                     <label for="">Producto</label>
-                    <input type="text" class =  "input">
+                    <input type="text" class="input" list="list_product" name="id_producto" id="id_producto" form="id_form_consumo">
+                    <datalist id="list_product">
+                    </datalist>
                 </div>
                 <div class="container-label">
                     <label for="">Precio unitario</label>
-                    <input type="text" class ="input">
+                    <input type="number" step="0.01" class="input" name="id_precio" id="id_precio" form="id_form_consumo">
                 </div>
                 <div class="container-label">
                     <label for="">Cantidad</label>
-                    <input type="text" class = "input">
+                    <input type="number" class="input" name="id_cantidad" id="id_cantidad" form="id_form_consumo">
                 </div>
             </div>
             <div class="botones_consumo">
-                <button>Agregar consumo</button>
+                <button type="submit" form="id_form_consumo">Agregar consumo</button>
                 <button>Agregar producto nuevo</button>
             </div>
         </div>
         <div class="participants">
-            <label for="" class="shared-by">Compartido por: <span class="add"><a href="/eventos/{{id_evento}}">Agregar</a></span></label>
-            <form class = "participants-checkbox">
+            <label for="" class="shared-by">Compartido por: <span class="add"><a
+                        href="/eventos/{{id_evento}}">Agregar</a></span></label>
+            <form class="participants-checkbox">
                 {% for record in rows%}
-                <div class = "nombre_participante">
-                    <input type="checkbox" id="{{record[0]}}"  name="participantes" value="{{record[0]}}">
+                <div class="nombre_participante">
+                    <input type="checkbox" id="{{record[0]}}" name="participantes" value="{{record[0]}}"
+                        form="id_form_consumo">
                     <label for="{{record[0]}}">{{record[3]}}</label>
                 </div>
                 {% endfor %}
@@ -66,7 +71,7 @@
             <ul>
             </ul>
         </div>
-        <div class = "cuenta_resumen">
+        <div class="cuenta_resumen">
             <h2>Resumen:</h2>
             <ul>
             </ul>
@@ -74,6 +79,6 @@
     </section>
 </main>
 <div class="button-container">
-    <button class = "finalizar-evento">Finalizar evento</button>
+    <button class="finalizar-evento">Finalizar evento</button>
 </div>
 {% endblock %}

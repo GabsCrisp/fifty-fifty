@@ -194,3 +194,30 @@ def buscar_user():
     for user in u:
         usuarios.append(user[0])
     return jsonify(usuarios)
+
+@app.route("/<idEvento>/producto", methods=["POST"])
+@login_required
+def buscar_producto(idEvento):
+    body = request.get_json() #
+    producto = db.execute("SELECT nombre_producto, precio_producto from productos WHERE id_evento = ? AND nombre_producto LIKE ?",
+                   (idEvento,"%" + body["nombre_producto"] + "%")).fetchall()
+    return jsonify(producto)
+
+@app.route("/<idEvento>/crear_consumo", methods =["POST"])
+@login_required
+def crear_consumo(idEvento):
+    categoria = request.form.get("categoria")
+    id_producto = request.form.get("id_producto")
+    id_precio = request.form.get("id_precio")
+    id_cantidad = request.form.get("id_cantidad")
+    participantes = request.form.getlist("participantes")
+
+    # TODO: validar si el producto existe
+
+    # insertar
+    db.execute(" INSERT INTO productos (id_categoria, nombre_producto, precio_producto,id_evento) values(?,?,?,?)", (categoria,id_producto,id_precio,idEvento))
+    conn.commit()
+    
+
+    return jsonify({})
+    
