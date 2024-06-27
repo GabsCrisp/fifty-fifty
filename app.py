@@ -213,11 +213,20 @@ def crear_consumo(idEvento):
     participantes = request.form.getlist("participantes")
 
     # TODO: validar si el producto existe
+    productodb= db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
+    if not productodb:
+        # insertar
+        db.execute(" INSERT INTO productos (id_categoria, nombre_producto, precio_producto,id_evento) values(?,?,?,?)", (categoria,id_producto,id_precio,idEvento))
+        conn.commit()
+        productodb= db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
 
-    # insertar
-    db.execute(" INSERT INTO productos (id_categoria, nombre_producto, precio_producto,id_evento) values(?,?,?,?)", (categoria,id_producto,id_precio,idEvento))
+    # obtener el subtotal por participante
+    subtotal = int(id_precio) * int(id_cantidad) / len(participantes)
+    for i in participantes:
+        db.execute("INSERT INTO consumo_participante (id_participante_evento, id_producto, cantidad_producto, subtotal) values(?,?,?,?)", (i,productodb[0],id_cantidad,subtotal))
     conn.commit()
-    
+    # bucle para insertar consumo 
+    response = {"status": "si", "redirect": "/usuario",
+                "message": "La contraseña actual es incorrecta"}
 
-    return jsonify({})
-    
+    return jsonify(response)
