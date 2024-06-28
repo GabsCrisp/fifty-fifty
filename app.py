@@ -228,3 +228,8 @@ def crear_consumo(idEvento):
         db.execute("INSERT INTO consumo_participante (id_participante_evento, id_producto, cantidad_producto, subtotal) values(?,?,?,?)", (i,productodb[0],id_cantidad,subtotal))
     conn.commit()
     return redirect('/eventos/' + idEvento + '/consumo_evento')
+
+@app.route("/cuenta_final")
+@session_activate
+def cuenta_final(): 
+    return render_template("cuenta_final.html")
