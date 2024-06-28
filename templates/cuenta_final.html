@@ -1,0 +1,167 @@
+{% extends "layout.html" %}
+{% block css_principal %}{% endblock %}
+{% block title %}Cuenta final{% endblock %}
+
+{% block head %}
+<div class="user">
+    <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
+    <form action="/logout">
+        <button type="submit">Log out</button>
+    </form>
+</div>
+{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/styles_cuenta_final.css">
+{% endblock %}
+
+{% block content %}
+<h1>Nombre_evento</h1>
+<main>
+    <table class="table cuenta_final">
+        <thead>
+            <h5>nombre_participante</h5>
+            <tr>
+                <th class="text-start">Producto</th>
+                <th class="text-end">Precio unitario</th>
+                <th class="text-end">Cantidad</th>
+                <th class="text-end">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-start">1</td>
+                <td class="text-end">2</td>
+                <td class="text-end">3</td>
+                <td class="text-end">4</td>
+            </tr>
+            <tr>
+                <td class="text-start">1</td>
+                <td class="text-end">2</td>
+                <td class="text-end">3</td>
+                <td class="text-end">4</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
+                <td class="border-0 text-end">11</td>
+            </tr>
+            <td colspan="4" class="border-0">
+                <div class="button-container">
+                    <button class="button-total">Descargar contenido</button>
+                </div>
+            </td>
+        </tfoot>
+    </table>
+    <table class="table cuenta_final">
+        <thead>
+            <h5>nombre_participante</h5>
+            <tr>
+                <th class="text-start">Producto</th>
+                <th class="text-end">Precio unitario</th>
+                <th class="text-end">Cantidad</th>
+                <th class="text-end">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-start">1</td>
+                <td class="text-end">2</td>
+                <td class="text-end">3</td>
+                <td class="text-end">4</td>
+            </tr>
+            <tr>
+                <td class="text-start">1</td>
+                <td class="text-end">2</td>
+                <td class="text-end">3</td>
+                <td class="text-end">4</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
+                <td class="border-0 text-end">11</td>
+            </tr>
+            <td colspan="4" class="border-0">
+                <div class="button-container">
+                    <button class="button-total">Descargar contenido</button>
+                </div>
+            </td>
+        </tfoot>
+    </table>
+    <table class="table cuenta_final">
+        <thead>
+            <h5>nombre_participante</h5>
+            <tr>
+                <th class="text-start">Producto</th>
+                <th class="text-end">Precio unitario</th>
+                <th class="text-end">Cantidad</th>
+                <th class="text-end">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-start">1</td>
+                <td class="text-end">2</td>
+                <td class="text-end">3</td>
+                <td class="text-end">4</td>
+            </tr>
+            <tr>
+                <td class="text-start">1</td>
+                <td class="text-end">2</td>
+                <td class="text-end">3</td>
+                <td class="text-end">4</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
+                <td class="border-0 text-end">11</td>
+            </tr>
+            <td colspan="4" class="border-0">
+                <div class="button-container">
+                    <button class="button-total">Descargar contenido</button>
+                </div>
+            </td>
+        </tfoot>
+    </table>
+    <table class="table cuenta_final">
+        <thead>
+            <h5>nombre_participante</h5>
+            <tr>
+                <th class="text-start">Producto</th>
+                <th class="text-end">Precio unitario</th>
+                <th class="text-end">Cantidad</th>
+                <th class="text-end">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-start">1</td>
+                <td class="text-end">2</td>
+                <td class="text-end">3</td>
+                <td class="text-end">4</td>
+            </tr>
+            <tr>
+                <td class="text-start">1</td>
+                <td class="text-end">2</td>
+                <td class="text-end">3</td>
+                <td class="text-end">4</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
+                <td class="border-0 text-end">11</td>
+            </tr>
+            <td colspan="4" class="border-0">
+                <div class="button-container">
+                    <button class="button-total">Descargar contenido</button>
+                </div>
+            </td>
+        </tfoot>
+    </table>
+</main>
+
+
+{% endblock %}

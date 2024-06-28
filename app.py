@@ -230,3 +230,8 @@ def crear_consumo(idEvento):
                 "message": "La contraseña actual es incorrecta"}
 
     return jsonify(response)
+
+@app.route("/cuenta_final")
+@session_activate
+def cuenta_final(): 
+    return render_template("cuenta_final.html")
