@@ -175,7 +175,11 @@ h1 {
     justify-content: space-evenly;
     margin-bottom: 1em;
 }
-
+#agregar_consumo:disabled, #agregar_producto:disabled
+{
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 .consumos {
     display: flex;
     flex: row;

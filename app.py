@@ -199,6 +199,8 @@ def buscar_user():
 @login_required
 def buscar_producto(idEvento):
     body = request.get_json() #
+    print("A")
+    print(body)
     producto = db.execute("SELECT nombre_producto, precio_producto from productos WHERE id_evento = ? AND nombre_producto LIKE ?",
                    (idEvento,"%" + body["nombre_producto"] + "%")).fetchall()
     return jsonify(producto)
@@ -208,28 +210,24 @@ def buscar_producto(idEvento):
 def crear_consumo(idEvento):
     categoria = request.form.get("categoria")
     id_producto = request.form.get("id_producto")
-    id_precio = request.form.get("id_precio")
+    id_precio = request.form.get("precio")
     id_cantidad = request.form.get("id_cantidad")
     participantes = request.form.getlist("participantes")
-
-    # TODO: validar si el producto existe
-    productodb= db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
-    if not productodb:
+    opcion_de_agregado = request.form.get("opcion_de_agregado")
+    print(opcion_de_agregado)
+    if(opcion_de_agregado == "Agregar producto"):
         # insertar
         db.execute(" INSERT INTO productos (id_categoria, nombre_producto, precio_producto,id_evento) values(?,?,?,?)", (categoria,id_producto,id_precio,idEvento))
         conn.commit()
-        productodb= db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
-
-    # obtener el subtotal por participante
+        
+    productodb = db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
     subtotal = int(id_precio) * int(id_cantidad) / len(participantes)
+    # obtener el subtotal por participante
+    # bucle para insertar consumo 
     for i in participantes:
         db.execute("INSERT INTO consumo_participante (id_participante_evento, id_producto, cantidad_producto, subtotal) values(?,?,?,?)", (i,productodb[0],id_cantidad,subtotal))
     conn.commit()
-    # bucle para insertar consumo 
-    response = {"status": "si", "redirect": "/usuario",
-                "message": "La contraseña actual es incorrecta"}
-
-    return jsonify(response)
+    return redirect('/eventos/' + idEvento + '/consumo_evento')
 
 @app.route("/cuenta_final")
 @session_activate
