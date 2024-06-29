@@ -12,31 +12,32 @@
 * {
     transition: all 0.5s ease-in-out;
 }
+
 body {
     margin: 0;
     font-family: 'poppins-light';
     background-color: #FBF9F1;
 
 }
-h1{
+
+h1 {
     font-size: 1.5rem;
     padding-top: 1em;
     padding-left: 1em;
 }
-h4 
-{
+
+h4 {
     text-align: center;
 }
 
-form 
-{
+form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-form button 
-{
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+
+form button {
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
     border: 1px solid transparent;
     border-radius: 1em;
     padding: 0.5em 3em 0.5em 3em;
@@ -44,20 +45,21 @@ form button
     transition: 1s;
 
 }
-#button_invitado:disabled
-{
+
+#button_invitado:disabled {
     opacity: 0.5;
 }
-datalist
-{
+
+datalist {
     background-color: pink;
 }
-form button:hover 
-{
+
+form button:hover {
     transform: scale(1.1);
     color: white;
     background-color: black;
 }
+
 .main_header {
     width: 100%;
     height: 20vh;
@@ -66,6 +68,7 @@ form button:hover
     align-items: center;
     background-color: #DAE2B6;
 }
+
 a {
     text-decoration: none;
     font-family: 'poppins-light';
@@ -134,6 +137,7 @@ h3 {
     }
 
 }
+
 @media (max-width: 400px) {
     .icono_image_text {
         margin: 5%;
@@ -164,10 +168,11 @@ main {
     padding: 1em;
     display: flex;
     justify-content: space-evenly;
-   
+
 }
+
 label {
-    margin-bottom:0.8em;
+    margin-bottom: 0.8em;
 }
 
 .event-container form {
@@ -176,7 +181,8 @@ label {
 
 }
 
-.event-container, .participants-list {
+.event-container,
+.participants-list {
     background-color: #e5e9c8;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -185,7 +191,8 @@ label {
 }
 
 
-.event-container h1, .participants-list h2 {
+.event-container h1,
+.participants-list h2 {
     margin-bottom: 1em;
 }
 
@@ -205,7 +212,8 @@ label {
     bottom: 10%;
     font-size: 1.2rem;
 }
-.participants{
+
+.participants {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -222,6 +230,12 @@ label {
     color: white;
     font-family: 'poppins-bold';
     top: 1em;
+}
+
+.participants-list {
+    max-height: 24em;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .participants-list ul {
@@ -246,10 +260,11 @@ label {
     color: red;
     cursor: pointer;
 }
-.id_usuarios
-{
+
+.id_usuarios {
     visibility: hidden;
 }
+
 .go-to-event {
     background-color: #43766C;
     border-radius: 10px;
@@ -284,7 +299,7 @@ label {
 }
 
 .vertical-line {
-    border-left:1px solid #000;
+    border-left: 1px solid #000;
     height: 100%;
 }
 
@@ -298,15 +313,18 @@ label {
         justify-content: space-evenly;
         gap: 1em;
     }
-    .event-container, .participants-list
-    {
+
+    .event-container,
+    .participants-list {
         width: 90%;
     }
+
     .vertical-line {
         background-color: #97A265;
         display: none;
-    } 
-    .participants-list{
+    }
+
+    .participants-list {
         overflow: scroll;
     }
 }
@@ -317,40 +335,44 @@ label {
         justify-content: center;
         gap: 1em;
     }
-    .event-container, .participants-list
-    {
+
+    .event-container,
+    .participants-list {
         width: 40%;
     }
 }
-@media (min-height:1000px) and (max-height:1400px)
-{
-    html, body 
-    {
+
+@media (min-height:1000px) and (max-height:1400px) {
+
+    html,
+    body {
         height: 100%;
     }
-    main 
-    {
+
+    main {
         height: 70%;
     }
-    label 
-    {
+
+    label {
         font-size: 1.5rem;
         margin: 0.5em;
     }
-    .input
-    {
+
+    .input {
         height: 80px;
     }
-    .add-participants 
-    {
+
+    .add-participants {
         font-size: 1.5rem;
     }
-    .event-div
-    {
+
+    .event-div {
         font-size: 1.5rem;
     }
-    .participants-list
-    {
+
+    .participants-list {
         font-size: 1.2rem;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 }
