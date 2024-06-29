@@ -47,10 +47,19 @@ def get_detalle_evento(db, idEvento, request, conn):
     return render_template("participantes.html", rows=rows, id_evento = idEvento, nombre_evento = nombre_evento)
 
 def get_remover_participantes(db, request, conn, redirect):
-    remove = request.get_json()
-    print(remove)
-    db.execute("DELETE FROM participante_evento WHERE id_participante_evento = ? AND id_evento = ?", (remove["id_participante_evento"],remove["idEvento"]))
+    respuesta_json = request.get_json()
+    participanteid = respuesta_json["id_participante_evento"]
+    evento = respuesta_json["idEvento"]
+    username = respuesta_json["username"]
+
+    # Validar si ya realizó consumo
+    respuesta = db.execute ("SELECT id_participante FROM consumo_cadaparticipante WHERE id_participante = ? AND id_evento = ?",(participanteid,evento)).fetchone()
+    if respuesta:
+        response = {"status": "error", "redirect": "/eventos/" +
+                    evento, "message": "Participante tiene consumo. No se puede eliminar"}
+        return jsonify(response)
+    db.execute("DELETE FROM participante_evento WHERE id_participante_evento = ? AND id_evento = ?", (participanteid,evento))
     conn.commit()
-    response = {"status": "success","message": remove["username"] + " ha sido eliminado/a del evento", "redirect":  "/eventos/" + remove["idEvento"]}
+    response = {"status": "success","message": username + " ha sido eliminado/a del evento", "redirect":  "/eventos/" + evento}
     return jsonify(response)
     
