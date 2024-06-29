@@ -6,7 +6,7 @@
 <div class="user">
     <img id="evento_imagen" src="/static/logos/evento.svg" alt="">
     <h4><a href="/usuario">¡Hola, {{session["username"]}}!</a></h4>
-    <form action="/logout">
+    <form action="/logout" class="logout">
         <button type="submit">Log out</button>
     </form>
 </div>
@@ -58,7 +58,7 @@
             <label for="" class="shared-by">Compartido por: <span class="add"><a
                         href="/eventos/{{id_evento}}">Agregar</a></span></label>
             <form class="participants-checkbox">
-                {% for record in rows%}
+                {% for record in rows %}
                 <div class="nombre_participante">
                     <input class="input participantes" type="checkbox" id="{{record[0]}}" name="participantes" value="{{record[0]}}"
                         form="id_form_consumo" class="participantes">
@@ -71,7 +71,12 @@
     <section class="resumenes">
         <div class="participantes_resumen">
             <h2>Participantes:</h2>
-            <ul>
+            <ul> 
+                {% for persona in consumo_cadaparticipante %}
+                <li>
+                    <span class="subtotal">{{persona[1]}} C$ {{persona[0]}}</span>
+                </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="cuenta_resumen">

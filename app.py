@@ -120,10 +120,8 @@ def consumo_evento(idEvento):
     consumo_cadaparticipante = db.execute("""SELECT round(sum(subtotal_participante),2),nombre_participante from participante_evento JOIN consumo_cadaparticipante on
                 participante_evento.id_participante_evento = consumo_cadaparticipante.id_participante
                 where participante_evento.id_evento = ? group by participante_evento.id_participante_evento""", (idEvento,)).fetchall()
-    
     print(consumo_cadaparticipante)
-
-    return render_template("consumo_evento.html",rows=rows, id_evento = idEvento, nombre_evento = nombre_evento,lista_categoria = lista_categoria)
+    return render_template("consumo_evento.html",rows=rows, id_evento = idEvento, nombre_evento = nombre_evento,lista_categoria = lista_categoria, consumo_cadaparticipante = consumo_cadaparticipante)
 
 
 @app.route("/eventos", methods=["GET", "POST"])
