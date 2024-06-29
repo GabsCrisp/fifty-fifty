@@ -154,6 +154,7 @@ def consumo_evento(idEvento):
                 consumo_info["producto"] = i[8]
                 consumo_info["precio"] = i[9]
                 consumo_info["cantidad"] = i[2]
+                consumo_info["precio_total"] = i[4]
                 print(consumo_info)
                 consumo_final.append(consumo_info)
                 print(consumo_final)

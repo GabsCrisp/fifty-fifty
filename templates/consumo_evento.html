@@ -87,6 +87,7 @@
                 <li>
                     producto: {{consumo['producto']}} precio: {{consumo['precio']}}
                     cantidad: {{consumo['cantidad']}}
+                    total: {{consumo['precio_total']}}
                     consumido por: 
                     {% for key,value in consumo['consumidores'].items() %}
                     <ol>
