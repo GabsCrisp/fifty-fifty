@@ -116,6 +116,12 @@ def consumo_evento(idEvento):
     ).fetchall()
     nombre_evento = db.execute("SELECT nombre_evento FROM eventos WHERE id_evento = ?", (idEvento,)).fetchone()[0]
     lista_categoria = db.execute("SELECT * FROM categorias").fetchall()
+    
+    consumo_cadaparticipante = db.execute("""SELECT round(sum(subtotal_participante),2),nombre_participante from participante_evento JOIN consumo_cadaparticipante on
+                participante_evento.id_participante_evento = consumo_cadaparticipante.id_participante
+                where participante_evento.id_evento = ? group by participante_evento.id_participante_evento""", (idEvento,)).fetchall()
+    
+    print(consumo_cadaparticipante)
 
     return render_template("consumo_evento.html",rows=rows, id_evento = idEvento, nombre_evento = nombre_evento,lista_categoria = lista_categoria)
 
@@ -213,20 +219,33 @@ def crear_consumo(idEvento):
     id_precio = request.form.get("precio")
     id_cantidad = request.form.get("id_cantidad")
     participantes = request.form.getlist("participantes")
+    cantidad_individual = request.form.getlist("cantidad_individual")
     opcion_de_agregado = request.form.get("opcion_de_agregado")
-    print(opcion_de_agregado)
     if(opcion_de_agregado == "Agregar producto"):
-        # insertar
+        # insertar producto si no se encuentra en la tabla de productos
         db.execute(" INSERT INTO productos (id_categoria, nombre_producto, precio_producto,id_evento) values(?,?,?,?)", (categoria,id_producto,id_precio,idEvento))
         conn.commit()
         
     productodb = db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
-    subtotal = int(id_precio) * int(id_cantidad) / len(participantes)
+    #subtotal = int(id_precio) * int(id_cantidad) / len(participantes)
     # obtener el subtotal por participante
     # bucle para insertar consumo 
-    for i in participantes:
-        db.execute("INSERT INTO consumo_participante (id_participante_evento, id_producto, cantidad_producto, subtotal) values(?,?,?,?)", (i,productodb[0],id_cantidad,subtotal))
+    total_consumo = int(id_precio) * int(id_cantidad)
+    db.execute("INSERT INTO consumo_general (id_producto, cantidad_consumida, precio_uniproducto, total_consumo, id_evento) values(?,?,?,?, ?)", (productodb[0], id_cantidad,productodb[2], total_consumo, idEvento))
     conn.commit()
+    id_consumo = db.lastrowid
+    #insertamos consumo por cada participantes
+    print(participantes)
+    for index, item in enumerate(participantes):
+        print(item)
+        if(len(cantidad_individual) == 0):
+            subtotal_participante = int(productodb[2])/len(participantes)
+            db.execute("INSERT INTO consumo_cadaparticipante(id_consumo, id_participante, cantidad_individual, subtotal_participante, id_evento) VALUES(?, ?, ?, ?, ?)", (id_consumo, item, 1, subtotal_participante, idEvento))
+            conn.commit()
+        else:
+            subtotal_participante = int(productodb[2])*int(cantidad_individual[index])
+            db.execute("INSERT INTO consumo_cadaparticipante(id_consumo, id_participante, cantidad_individual, subtotal_participante, id_evento) VALUES(?, ?, ?, ?, ?)", (id_consumo, item, int(cantidad_individual[index]), subtotal_participante, idEvento))
+            conn.commit()
     return redirect('/eventos/' + idEvento + '/consumo_evento')
 
 @app.route("/cuenta_final")

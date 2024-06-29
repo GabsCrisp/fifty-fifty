@@ -185,7 +185,10 @@ h1 {
     flex: row;
     justify-content: space-evenly;
 }
-
+.cantidad_individual
+{
+    width: 30%;
+}
 .add {
     margin-left: 1em;
     font-size: 0.8rem;
@@ -303,6 +306,7 @@ h1 {
 
 .nombre_participante {
     margin-left: 1em;
+    gap: 1em;
 }
 
 .participants {

@@ -1,6 +1,4 @@
 const idEvento = document.getElementById("id_evento").value;
-const button_invitado = document.getElementById("button_invitado");
-const invited = document.getElementById("invited");
 const productos = document.getElementById("id_producto");
 const inputPrecio = document.getElementById("id_precio");
 const dataList = document.getElementById("list_product")
@@ -13,6 +11,23 @@ const precio = document.getElementById("precio");
 const form = document.getElementById("id_form_consumo");
 const opcion_de_agregado = document.getElementById("opcion_de_agregado");
 const botones_enviados = document.getElementsByClassName("botones_enviados");
+const cantidad_individual = document.getElementsByClassName("cantidad_individual")
+const id_cantidad = document.getElementById("id_cantidad");
+
+agregar_consumo.disabled = true;
+agregar_producto.disabled = true;
+let encontrado_db = false;
+id_cantidad.addEventListener("input", () => {
+    for(let i = 0; i < cantidad_individual.length; i++)
+        {
+            cantidad_individual[i].value = "";
+        }
+})
+for(let i = 0; i < participantes.length; i++)
+    {
+
+        participantes[i].addEventListener("change", habilitar_input_cantidad);
+    }
 
 for (let i = 0; i < botones_enviados.length; i++) {
     botones_enviados[i].addEventListener("click", (e) => {
@@ -20,29 +35,11 @@ for (let i = 0; i < botones_enviados.length; i++) {
     })
 }
 
-
 //el precio no se estaba enviando correctamente
 //enviamos precio en un input hidden
 form.addEventListener("submit", (e) => {
     precio.value = inputPrecio.value;
 })
-
-//va contando cuantos checkbox han sido chequeado
-function compartido_por() {
-    let compartido = 0;
-    compartido = 0;
-    for (let i = 0; i < participantes.length; i++) {
-        if (participantes[i].checked) {
-            compartido++
-        }
-
-    }
-    return compartido;
-}
-
-agregar_consumo.disabled = true;
-agregar_producto.disabled = true;
-let encontrado_db = false;
 
 for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener("input", verificacion_inputs)
@@ -125,6 +122,7 @@ function mostrarMensaje(status, message, redirect) {
     }
 }
 
+//habilita el boton correcto dependiendo de los inputs que tengamos
 function verificacion_inputs() {
     agregar_consumo.disabled = true
     agregar_producto.disabled = true
@@ -145,5 +143,66 @@ function verificacion_inputs() {
     else if (contador == inp.length && compartido > 0) {
         agregar_producto.disabled = false;
     }
+    limitar_cantidad_individual(id_cantidad.value)
+    //habilitar_input_cantidad()
+
+}
+//se encarga de limitar el tamaño maximo de los inputs numericos de los checkbox
+function limitar_cantidad_individual(valor)
+{
+    for(let i = 0; i < cantidad_individual.length; i++)
+        {
+            cantidad_individual[i].setAttribute("max", valor);
+        }
+}
+//va contando cuantos checkbox han sido chequeado
+function compartido_por() {
+    let compartido = 0;
+    compartido = 0;
+    for (let i = 0; i < participantes.length; i++) {
+        if (participantes[i].checked) {
+            compartido++
+        }
+
+    }
+    return compartido;
+}
+//crea dinamicamente cada uno de tus inputs numericos
+function habilitar_input_cantidad(e)
+{
+    input_afectado = e.target;
+    console.log(e.target)
+    let input;
+    //habilita los inputs
+    if(id_cantidad.value > 1)
+        {
+            if(input_afectado.checked)
+                {
+                    //crea dinamicamente cada uno de los inputs
+                    input = document.createElement("input");
+                    input.type = "number";
+                    input.name = "cantidad_individual"
+                    input.setAttribute("form", "id_form_consumo")
+                    input.classList.add("cantidad_individual")
+                    //agrega el elemento al div
+                    input_afectado.parentNode.appendChild(input);
+                    input.setAttribute("min", 1);
+                    input.setAttribute("max", id_cantidad.value);
+                }
+                else if(!e.target.checked) 
+                {
+                    input_afectado.parentNode.removeChild(input_afectado.parentNode.lastChild)
+                }
+         
+        }
+        else 
+        {
+            for(let i = 0; i < cantidad_individual.length; i++)
+                {
+                    cantidad_individual[i].value = ""
+                }
+        }
+
+     
 
 }
