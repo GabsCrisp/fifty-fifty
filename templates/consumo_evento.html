@@ -82,6 +82,18 @@
         <div class="cuenta_resumen">
             <h2>Resumen:</h2>
             <ul>
+                {% for consumo in consumo_final %}
+                <li>
+                    producto: {{consumo['producto']}} precio: {{consumo['precio']}}
+                    cantidad: {{consumo['cantidad']}}
+                    consumido por: 
+                    {% for key,value in consumo['consumidores'].items() %}
+                    <ol>
+                        {{value}}
+                    </ol>
+                    {% endfor %}
+                </li>
+                {% endfor %}
             </ul>
         </div>
     </section>

@@ -116,12 +116,50 @@ def consumo_evento(idEvento):
     ).fetchall()
     nombre_evento = db.execute("SELECT nombre_evento FROM eventos WHERE id_evento = ?", (idEvento,)).fetchone()[0]
     lista_categoria = db.execute("SELECT * FROM categorias").fetchall()
-    
+    # obtenemos el la suma del total del consumo por cada participante del evento
     consumo_cadaparticipante = db.execute("""SELECT round(sum(subtotal_participante),2),nombre_participante from participante_evento JOIN consumo_cadaparticipante on
                 participante_evento.id_participante_evento = consumo_cadaparticipante.id_participante
                 where participante_evento.id_evento = ? group by participante_evento.id_participante_evento""", (idEvento,)).fetchall()
-    print(consumo_cadaparticipante)
-    return render_template("consumo_evento.html",rows=rows, id_evento = idEvento, nombre_evento = nombre_evento,lista_categoria = lista_categoria, consumo_cadaparticipante = consumo_cadaparticipante)
+    
+    id_consumo = db.execute("select id_consumo, id_participante from consumo_cadaparticipante where id_evento = ?", (idEvento,)).fetchall()
+    consumo = {}
+    for i in id_consumo:
+        #si ya hay consumo existente agrega el id del consumidor
+        if(i[0] in consumo):
+            consumidores.append(i[1])
+            consumo[i[0]] = consumidores
+        #si no crea una lista vacia y agrega el primer consumidor
+        else:
+            consumidores = []
+            consumidores.append(i[1])
+            consumo[i[0]] = consumidores
+
+    consumo_general = db.execute("""select * from consumo_general join productos on consumo_general.id_producto = productos.id_producto where consumo_general.id_evento = ?""", (idEvento,)).fetchall()
+    consumo_final = []
+    for i in consumo_general:
+        consumo_info = {}
+        for j in consumo:
+            if(i[0] == j):
+                # crea una lista de ? que se pondran dentro del IN
+                ids_str = ','.join('?'for _ in consumo[j])
+                #agarramos nombre participante que participaron en el consumo
+                participantes = db.execute("SELECT nombre_participante, id_participante_evento from participante_evento where id_evento = ?", (idEvento,)).fetchall()
+                p = {}
+                for participante in participantes:
+                    for id_consumidor in consumo[j]:
+                        if(id_consumidor == participante[1]):
+                            p[id_consumidor] = participante[0]
+                #diccionario que almacena producto y nombre participantes que comparten este producto
+                consumo_info["consumidores"] = p
+                consumo_info["producto"] = i[8]
+                consumo_info["precio"] = i[9]
+                consumo_info["cantidad"] = i[2]
+                print(consumo_info)
+                consumo_final.append(consumo_info)
+                print(consumo_final)
+
+    #print(consumo_final)
+    return render_template("consumo_evento.html",rows=rows, id_evento = idEvento, nombre_evento = nombre_evento,lista_categoria = lista_categoria, consumo_cadaparticipante = consumo_cadaparticipante, consumo_final = consumo_final)
 
 
 @app.route("/eventos", methods=["GET", "POST"])
