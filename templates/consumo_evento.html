@@ -85,16 +85,31 @@
             <ul>
                 {% for consumo in consumo_final %}
                 <li>
-                    producto: {{consumo['producto']}} precio: {{consumo['precio']}}
-                    cantidad: {{consumo['cantidad']}}
-                    total: {{consumo['precio_total']}}
-                    consumido por: 
+                    <div class="item">
+                        <label>Producto:</label>
+                        <span> {{consumo['producto']}}</span>
+                    </div>
+                    <div class="item">
+                        <label>Precio:</label>
+                        <span>C$ {{consumo['precio']}}</span>
+                    </div>
+                    <div class="item">
+                        <label>Cantidad:</label>
+                        <span>{{consumo['cantidad']}}</span>
+                    </div>
+                    <div class="item">
+                        <label>Total:</label>
+                        <span>C$ {{consumo['precio_total']}}</span>
+                    </div>
+
+                    <label>Consumido por:</label>
                     {% for key,value in consumo['consumidores'].items() %}
                     <ol>
                         {{value}}
                     </ol>
                     {% endfor %}
                 </li>
+                <hr class = "divisor">
                 {% endfor %}
             </ul>
         </div>

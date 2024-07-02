@@ -27,4 +27,4 @@
 
 --Todavía no hay drop de consumo_participante hasta que se sepa que está correcto lo que se pensó
 --Acá está el comando si:
---DROP TABLE consumos_participante
+--DROP TABLE consumo_participante
