@@ -61,7 +61,7 @@
                 {% for record in rows %}
                 <div class="nombre_participante">
                     <input class="input participantes" type="checkbox" id="{{record[0]}}" name="participantes" value="{{record[0]}}"
-                        form="id_form_consumo" class="participantes">
+                        form="id_form_consumo" class="participantes" disabled>
                     <label for="{{record[0]}}">{{record[3]}}</label>
                 </div>
                 {% endfor %}

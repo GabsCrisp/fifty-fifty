@@ -18,16 +18,45 @@ agregar_consumo.disabled = true;
 agregar_producto.disabled = true;
 let encontrado_db = false;
 id_cantidad.addEventListener("input", () => {
-    for(let i = 0; i < cantidad_individual.length; i++)
-        {
-            cantidad_individual[i].value = "";
+    const nuevoValor = id_cantidad.value;
+    if (nuevoValor == "") {
+        for (let i = 0; i < participantes.length; i++) {
+            participantes[i].disabled = true
+            participantes[i].checked = false
         }
-})
-for(let i = 0; i < participantes.length; i++)
-    {
 
-        participantes[i].addEventListener("change", habilitar_input_cantidad);
     }
+    else {
+        for (let i = 0; i < participantes.length; i++) {
+            participantes[i].disabled = false
+        }
+    }
+
+    if (nuevoValor == 1) {
+        const cantidad_individual_array = Array.from(cantidad_individual);
+
+        // Iteramos sobre el array y eliminamos los elementos
+        cantidad_individual_array.forEach(element => {
+            element.remove();
+        });
+
+    
+    } else {
+        for (let i = 0; i < participantes.length;i++){
+            habilitar_input_cantidad_base(participantes[i])
+        }
+    }
+
+
+
+    for (let i = 0; i < cantidad_individual.length; i++) {
+        cantidad_individual[i].value = "";
+    }
+})
+for (let i = 0; i < participantes.length; i++) {
+
+    participantes[i].addEventListener("change", habilitar_input_cantidad);
+}
 
 for (let i = 0; i < botones_enviados.length; i++) {
     botones_enviados[i].addEventListener("click", (e) => {
@@ -148,12 +177,10 @@ function verificacion_inputs() {
 
 }
 //se encarga de limitar el tamaño maximo de los inputs numericos de los checkbox
-function limitar_cantidad_individual(valor)
-{
-    for(let i = 0; i < cantidad_individual.length; i++)
-        {
-            cantidad_individual[i].setAttribute("max", valor);
-        }
+function limitar_cantidad_individual(valor) {
+    for (let i = 0; i < cantidad_individual.length; i++) {
+        cantidad_individual[i].setAttribute("max", valor);
+    }
 }
 //va contando cuantos checkbox han sido chequeado
 function compartido_por() {
@@ -168,41 +195,36 @@ function compartido_por() {
     return compartido;
 }
 //crea dinamicamente cada uno de tus inputs numericos
-function habilitar_input_cantidad(e)
-{
-    input_afectado = e.target;
-    console.log(e.target)
+function habilitar_input_cantidad(e) {
+   habilitar_input_cantidad_base(e.target);
+}
+function habilitar_input_cantidad_base(input_afectado) {
+
     let input;
     //habilita los inputs
-    if(id_cantidad.value > 1)
-        {
-            if(input_afectado.checked)
-                {
-                    //crea dinamicamente cada uno de los inputs
-                    input = document.createElement("input");
-                    input.type = "number";
-                    input.name = "cantidad_individual"
-                    input.setAttribute("form", "id_form_consumo")
-                    input.classList.add("cantidad_individual")
-                    //agrega el elemento al div
-                    input_afectado.parentNode.appendChild(input);
-                    input.setAttribute("min", 1);
-                    input.setAttribute("max", id_cantidad.value);
-                }
-                else if(!e.target.checked) 
-                {
-                    input_afectado.parentNode.removeChild(input_afectado.parentNode.lastChild)
-                }
-         
+    if (id_cantidad.value > 1) {
+        if (input_afectado.checked) {
+            // Verifica si ya existe un input con la clase "cantidad_individual" en el contenedor padre
+            const existingInput = input_afectado.parentNode.querySelector(".cantidad_individual");
+            if (!existingInput) {
+                // Crea dinámicamente cada uno de los inputs
+                input = document.createElement("input");
+                input.type = "number";
+                input.name = "cantidad_individual";
+                input.setAttribute("form", "id_form_consumo");
+                input.classList.add("cantidad_individual");
+                // Agrega el elemento al div
+                input_afectado.parentNode.appendChild(input);
+                input.setAttribute("min", 1);
+                input.setAttribute("max", id_cantidad.value);
+            }
+        } else if (!input_afectado.checked) {
+            input_afectado.parentNode.querySelector(".cantidad_individual").remove();
         }
-        else 
-        {
-            for(let i = 0; i < cantidad_individual.length; i++)
-                {
-                    cantidad_individual[i].value = ""
-                }
+    } else {
+        const cantidad_individual = document.getElementsByClassName("cantidad_individual");
+        for (let i = 0; i < cantidad_individual.length; i++) {
+            cantidad_individual[i].value = "";
         }
-
-     
-
+    }
 }

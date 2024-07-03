@@ -258,6 +258,14 @@ def crear_consumo(idEvento):
     participantes = request.form.getlist("participantes")
     cantidad_individual = request.form.getlist("cantidad_individual")
     opcion_de_agregado = request.form.get("opcion_de_agregado")
+    list_cantidad  = []
+    for c in cantidad_individual:
+        list_cantidad.append(int)
+    if(len(cantidad_individual) != 0 and sum(cantidad_individual) != int(id_cantidad)):
+        response = {"status": "error", "redirect": "/usuario",
+            "message": "No sabes sumar -.-"}
+        return jsonify(response)
+    
     if(opcion_de_agregado == "Agregar producto"):
         # insertar producto si no se encuentra en la tabla de productos
         db.execute(" INSERT INTO productos (id_categoria, nombre_producto, precio_producto,id_evento) values(?,?,?,?)", (categoria,id_producto,id_precio,idEvento))
