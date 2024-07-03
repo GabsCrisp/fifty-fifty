@@ -251,10 +251,6 @@ h1 {
     flex-direction: column;
     gap: 0.5em;
     font-size: 1em;
-    max-height: 250px;
-    /* Ajusta esta altura máxima según tus necesidades */
-    overflow-y: auto;
-    /* Habilita el scroll vertical */
 }
 
 .resumenes {
@@ -270,7 +266,16 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0.5em;
     width: 35%;
+    max-height: 200px;
     overflow: scroll;
+
+}
+
+.participantes_resumen ul
+{
+    background-color: #FEFDED;
+    margin: 1em;
+    border-radius: 10px;
 
 }
 
@@ -288,9 +293,38 @@ li .subtotal {
     background-color: #e5e9c8;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 0.5em;
+    gap: 0.4em;
     width: 35%;
+    max-height: 200px;
     overflow: scroll;
+}
+
+.divisor
+{
+    height: 2px; 
+    border: none; 
+    background-color: #97A265;
+    padding-right: 1em;
+}
+
+.cuenta_resumen ul
+{
+    background-color: #FEFDED;
+    margin: 0.8em;
+    padding: 0.8em;
+    border-radius: 15px;
+}
+
+.cuenta_resumen label 
+{
+    font-family: "poppins-bold";
+}
+
+.cuenta_resumen li{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
 }
 
 .button-container {
@@ -301,33 +335,29 @@ li .subtotal {
 }
 
 .finalizar-evento {
-    margin-top: 1em;
-    width: 30%;
+    margin-top: 3em;
+    width: 25%;
     background-color: #43766C;
     border-radius: 10px;
     border: none;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     justify-content: center;
-    padding: 0.7em;
+    padding: 0.5em;
     text-decoration: none;
     color: white;
     font-family: 'poppins-bold';
     top: 1em;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .resumenes h2 {
     font-size: 1em;
 }
 
-.nombre_participante,
-.participants {
+.nombre_participante {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.nombre_participante {
     margin-left: 1em;
     gap: 1em;
 }
@@ -339,10 +369,10 @@ li .subtotal {
     border: 3px solid #43766C;
     width: 80%;
     gap: 1em;
-    overflow: scroll;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-
-
 
 @media(max-width: 700px) {
     .info {
@@ -363,19 +393,17 @@ li .subtotal {
         box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
         width: 100%;
         padding: 1em;
-        max-height: 240px;
-        /* Ajusta esta altura máxima según tus necesidades */
-        overflow-y: auto;
-        /* Habilita el scroll vertical */
-        overflow-x: hidden;
     }
 
     .participants-checkbox {
         font-size: 0.85em;
-        padding: 0.5em;
+        padding: 0.4em;
         height: 100%;
         width: 100%;
         justify-content: center;
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .botones_consumo {
@@ -383,6 +411,9 @@ li .subtotal {
 
     }
 
+    .cuenta_resumen li {
+        font-size: 1.1em;
+    }
     main {
         overflow-x: hidden;
         min-height: 100vh;
@@ -415,7 +446,6 @@ li .subtotal {
     }
 
 }
-
 
 @media(max-width: 450px) {
 
@@ -463,6 +493,9 @@ li .subtotal {
         width: 100%;
         gap: 1em;
         justify-content: center;
+        max-height: 400px;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 
     .botones_consumo button {
