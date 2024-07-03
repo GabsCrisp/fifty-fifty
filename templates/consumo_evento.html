@@ -20,7 +20,7 @@
 <h1>{{nombre_evento}}</h1>
 <input type="hidden" id="id_evento" value="{{id_evento}}">
 <main>
-    <form action="/{{id_evento}}/crear_consumo" id="id_form_consumo" method="post"></form>
+    <form action="/{{id_evento}}/crear_consumo" id="id_form_consumo" method="post" onsubmit="return validateForm()"></form>
     <section class="info">
         <div class="inputs">
             <div class="consumos">

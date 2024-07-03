@@ -228,3 +228,25 @@ function habilitar_input_cantidad_base(input_afectado) {
         }
     }
 }
+
+function validateForm() {
+    let confirmation = false;
+    let totalCantIndividual = 0
+    for (let i = 0; i < cantidad_individual.length; i++) {
+        totalCantIndividual += parseInt(cantidad_individual[i].value);
+    }
+
+    console.log(id_cantidad.value, totalCantIndividual);
+    if( id_cantidad.value != totalCantIndividual && id_cantidad.value>1 ){
+        Swal.fire({
+            title: "Occurió un error",
+            text: "Cantidad de cada participante no coincide con cantidad total",
+            icon: "error",
+        });
+        return false;
+    }
+    else{
+        return true;
+    }
+     
+}
