@@ -31,8 +31,12 @@ function crearEvento() {
 }
 
 
-function irEvento(idEvento) {
-    location.href = 'eventos/' + idEvento;
+function irEvento(idEvento, estado) {
+    if (estado == "FINALIZADO") {
+        location.href = idEvento + '/cuenta_final';
+    } else {
+        location.href = 'eventos/' + idEvento;
+    }
 }
 
 function mostrarMensaje(status, message, redirect) {

@@ -168,7 +168,7 @@ def consumo_evento(idEvento):
 def eventos():
     if request.method == "GET":
         rows = db.execute(
-            "SELECT nombre_evento, id_evento FROM eventos WHERE id_usuario = ?", (session["id"],)).fetchall()
+            "SELECT nombre_evento, id_evento, estado FROM eventos WHERE id_usuario = ?", (session["id"],)).fetchall()
         return render_template("eventos.html", rows=rows)
     else:
         respuesta = request.get_json()
@@ -257,14 +257,13 @@ def crear_consumo(idEvento):
     id_cantidad = request.form.get("id_cantidad")
     participantes = request.form.getlist("participantes")
     cantidad_individual = request.form.getlist("cantidad_individual")
-    opcion_de_agregado = request.form.get("opcion_de_agregado")
     
-    if(opcion_de_agregado == "Agregar producto"):
-        # insertar producto si no se encuentra en la tabla de productos
+    productodb= db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
+    if not productodb:
+        # insertar
         db.execute(" INSERT INTO productos (id_categoria, nombre_producto, precio_producto,id_evento) values(?,?,?,?)", (categoria,id_producto,id_precio,idEvento))
         conn.commit()
-        
-    productodb = db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
+        productodb= db.execute("SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento,id_producto)).fetchone()
     #subtotal = int(id_precio) * int(id_cantidad) / len(participantes)
     # obtener el subtotal por participante
     # bucle para insertar consumo 
@@ -286,7 +285,42 @@ def crear_consumo(idEvento):
             conn.commit()
     return redirect('/eventos/' + idEvento + '/consumo_evento')
 
-@app.route("/cuenta_final")
-@session_activate
-def cuenta_final(): 
-    return render_template("cuenta_final.html")
+
+@app.route("/<idEvento>/finalizar", methods =["POST"])
+@login_required
+def finalizar_evento(idEvento):
+    db.execute("UPDATE eventos SET estado = 'FINALIZADO' WHERE id_evento = ?",(idEvento,))
+    conn.commit()
+    return redirect('/' + idEvento + '/cuenta_final')
+
+
+
+
+@app.route("/<idEvento>/cuenta_final")
+@login_required
+def cuenta_final(idEvento): 
+    nombre_evento = db.execute("SELECT nombre_evento FROM eventos WHERE id_evento = ?", (idEvento,)).fetchone()[0]
+    rows = db.execute("SELECT id_participante_evento, nombre_participante FROM participante_evento WHERE id_evento = ?", (idEvento,)).fetchall()
+    
+    data = []
+
+    for row in rows:
+        to_add = {"id_participante_evento": row[0], "nombre_participante": row[1]}
+        consumo_rows = db.execute("""
+        SELECT p.nombre_producto, ccg.precio_uniproducto, SUM(ccp.cantidad_individual), SUM(ccp.subtotal_participante) FROM consumo_cadaparticipante ccp 
+              INNER JOIN consumo_general ccg ON ccg.id_consumo = ccp.id_consumo
+            INNER JOIN productos p ON ccg.id_producto = p.id_producto
+            WHERE ccp.id_evento = ? AND ccp.id_participante = ?            
+                                  GROUP BY p.nombre_producto, ccg.precio_uniproducto 
+
+        """,(idEvento,row[0])).fetchall()
+        to_add["consumos"] = consumo_rows
+        subtotal_participante = 0.0
+        for record in consumo_rows:
+            subtotal_participante = subtotal_participante + float(record[3])
+
+        to_add["subtotal"] = subtotal_participante
+
+        data.append(to_add)
+    
+    return render_template("cuenta_final.html", data = data,nombre_evento = nombre_evento)

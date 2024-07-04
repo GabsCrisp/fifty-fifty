@@ -15,11 +15,12 @@
 {% endblock %}
 
 {% block content %}
-<h1>Nombre_evento</h1>
+<h1>{{nombre_evento}}</h1>
 <main>
+{% for record in data %}
     <table class="table cuenta_final">
         <thead>
-            <h5>nombre_participante</h5>
+            <h5>{{record["nombre_participante"]}}</h5>
             <tr>
                 <th class="text-start">Producto</th>
                 <th class="text-end">Precio unitario</th>
@@ -28,23 +29,19 @@
             </tr>
         </thead>
         <tbody>
+            {% for row in record["consumos"]%}
             <tr>
-                <td class="text-start">1</td>
-                <td class="text-end">2</td>
-                <td class="text-end">3</td>
-                <td class="text-end">4</td>
+                <td class="text-start">{{row[0]}}</td>
+                <td class="text-end">{{row[1]}}</td>
+                <td class="text-end">{{row[2]}}</td>
+                <td class="text-end">{{row[3]}}</td>
             </tr>
-            <tr>
-                <td class="text-start">1</td>
-                <td class="text-end">2</td>
-                <td class="text-end">3</td>
-                <td class="text-end">4</td>
-            </tr>
+            {% endfor %}
         </tbody>
         <tfoot>
             <tr>
                 <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
-                <td class="border-0 text-end">11</td>
+                <td class="border-0 text-end">{{record["subtotal"]}}</td>
             </tr>
             <td colspan="4" class="border-0">
                 <div class="button-container">
@@ -53,114 +50,7 @@
             </td>
         </tfoot>
     </table>
-    <table class="table cuenta_final">
-        <thead>
-            <h5>nombre_participante</h5>
-            <tr>
-                <th class="text-start">Producto</th>
-                <th class="text-end">Precio unitario</th>
-                <th class="text-end">Cantidad</th>
-                <th class="text-end">Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-start">1</td>
-                <td class="text-end">2</td>
-                <td class="text-end">3</td>
-                <td class="text-end">4</td>
-            </tr>
-            <tr>
-                <td class="text-start">1</td>
-                <td class="text-end">2</td>
-                <td class="text-end">3</td>
-                <td class="text-end">4</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
-                <td class="border-0 text-end">11</td>
-            </tr>
-            <td colspan="4" class="border-0">
-                <div class="button-container">
-                    <button class="button-total">Descargar contenido</button>
-                </div>
-            </td>
-        </tfoot>
-    </table>
-    <table class="table cuenta_final">
-        <thead>
-            <h5>nombre_participante</h5>
-            <tr>
-                <th class="text-start">Producto</th>
-                <th class="text-end">Precio unitario</th>
-                <th class="text-end">Cantidad</th>
-                <th class="text-end">Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-start">1</td>
-                <td class="text-end">2</td>
-                <td class="text-end">3</td>
-                <td class="text-end">4</td>
-            </tr>
-            <tr>
-                <td class="text-start">1</td>
-                <td class="text-end">2</td>
-                <td class="text-end">3</td>
-                <td class="text-end">4</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
-                <td class="border-0 text-end">11</td>
-            </tr>
-            <td colspan="4" class="border-0">
-                <div class="button-container">
-                    <button class="button-total">Descargar contenido</button>
-                </div>
-            </td>
-        </tfoot>
-    </table>
-    <table class="table cuenta_final">
-        <thead>
-            <h5>nombre_participante</h5>
-            <tr>
-                <th class="text-start">Producto</th>
-                <th class="text-end">Precio unitario</th>
-                <th class="text-end">Cantidad</th>
-                <th class="text-end">Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-start">1</td>
-                <td class="text-end">2</td>
-                <td class="text-end">3</td>
-                <td class="text-end">4</td>
-            </tr>
-            <tr>
-                <td class="text-start">1</td>
-                <td class="text-end">2</td>
-                <td class="text-end">3</td>
-                <td class="text-end">4</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
-                <td class="border-0 text-end">11</td>
-            </tr>
-            <td colspan="4" class="border-0">
-                <div class="button-container">
-                    <button class="button-total">Descargar contenido</button>
-                </div>
-            </td>
-        </tfoot>
-    </table>
+{% endfor %}
 </main>
 
 

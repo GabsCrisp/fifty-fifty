@@ -19,7 +19,7 @@
 {% block content %}
 <main class="event-container">
   {% for record in rows %}
-  <div class="card w-75" onclick="irEvento('{{record[1]}}')">
+  <div class="card w-75" onclick="irEvento('{{record[1]}}','{{record[2]}}')">
     <div class="card-body">
       <h4>
         {{record[0]}}

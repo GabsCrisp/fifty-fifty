@@ -20,7 +20,8 @@
 <h1>{{nombre_evento}}</h1>
 <input type="hidden" id="id_evento" value="{{id_evento}}">
 <main>
-    <form action="/{{id_evento}}/crear_consumo" id="id_form_consumo" method="post" onsubmit="return validateForm()"></form>
+    <form action="/{{id_evento}}/crear_consumo" id="id_form_consumo" method="post" onsubmit="return validateForm()">
+    </form>
     <section class="info">
         <div class="inputs">
             <div class="consumos">
@@ -34,23 +35,28 @@
                 </div>
                 <div class="container-label">
                     <label for="">Producto</label>
-                    <input type="text" class="input inp" list="list_product" name="id_producto" id="id_producto" form="id_form_consumo" required>
+                    <input type="text" class="input inp" list="list_product" name="id_producto" id="id_producto"
+                        form="id_form_consumo" required>
                     <datalist id="list_product">
                     </datalist>
                 </div>
                 <div class="container-label">
                     <label for="">Precio</label>
-                    <input type="number" step="0.01" class="input inp" name="id_precio" id="id_precio" form="id_form_consumo" required>
+                    <input type="number" step="0.01" class="input inp" name="id_precio" id="id_precio"
+                        form="id_form_consumo" required>
                     <input type="hidden" id="precio" form="id_form_consumo" name="precio">
                 </div>
                 <div class="container-label">
                     <label for="">Cantidad</label>
-                    <input type="number" min="1" class="input inp" name="id_cantidad" id="id_cantidad" form="id_form_consumo" required>
+                    <input type="number" min="1" class="input inp" name="id_cantidad" id="id_cantidad"
+                        form="id_form_consumo" required>
                 </div>
             </div>
             <div class="botones_consumo">
-                <button type="submit" form="id_form_consumo" id="agregar_consumo" class="botones_enviados">Agregar consumo</button>
-                <button type="submit" form="id_form_consumo" id="agregar_producto" class="botones_enviados">Agregar producto</button>
+                <button type="submit" form="id_form_consumo" id="agregar_consumo" class="botones_enviados">Agregar
+                    consumo</button>
+                <button type="submit" form="id_form_consumo" id="agregar_producto" class="botones_enviados">Agregar
+                    producto</button>
                 <input type="hidden" name="opcion_de_agregado" form="id_form_consumo" id="opcion_de_agregado">
             </div>
         </div>
@@ -60,8 +66,8 @@
             <form class="participants-checkbox">
                 {% for record in rows %}
                 <div class="nombre_participante">
-                    <input class="input participantes" type="checkbox" id="{{record[0]}}" name="participantes" value="{{record[0]}}"
-                        form="id_form_consumo" class="participantes" disabled>
+                    <input class="input participantes" type="checkbox" id="{{record[0]}}" name="participantes"
+                        value="{{record[0]}}" form="id_form_consumo" class="participantes" disabled>
                     <label for="{{record[0]}}">{{record[3]}}</label>
                 </div>
                 {% endfor %}
@@ -71,11 +77,11 @@
     <section class="resumenes">
         <div class="participantes_resumen">
             <h2>Participantes:</h2>
-            <ul> 
+            <ul>
                 {% for persona in consumo_cadaparticipante %}
                 <li>
                     <span class="personita">{{persona[1]}}</span>
-                    <span class = "subtotal">C$ {{persona[0]}}</span>
+                    <span class="subtotal">C$ {{persona[0]}}</span>
                 </li>
                 {% endfor %}
             </ul>
@@ -109,14 +115,17 @@
                     </ol>
                     {% endfor %}
                 </li>
-                <hr class = "divisor">
+                <hr class="divisor">
                 {% endfor %}
             </ul>
         </div>
     </section>
 </main>
 <div class="button-container">
-    <button class="finalizar-evento">Finalizar evento</button>
+    <form action="/{{id_evento}}/finalizar" method="post" class="finalizar-evento">
+        <button class="">Finalizar evento</button>
+    </form>
+
 </div>
 <script src="/static/scripts/consumoEvento.js"></script>
 {% endblock %}
