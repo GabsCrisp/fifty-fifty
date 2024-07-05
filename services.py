@@ -10,22 +10,22 @@ def get_detalle_evento(db, idEvento, request, conn, session):
         participante = respuesta_json["participante"]
         validacion_invitado = db.execute("SELECT nombre_participante FROM participante_evento WHERE nombre_participante = ? AND id_evento = ?",(participante,idEvento)).fetchone()
         validacion_invitado2 = db.execute("SELECT usuario FROM usuarios WHERE usuario = ?",(participante,)).fetchone()
-        
         if tipo_usuario == "invitado":
             if validacion_invitado2:
                 response = {"status": "error", "redirect": "/eventos/" +
                 idEvento, "message": "Ya existe un invitado con este nombre"}
                 return jsonify(response)
-
-        if validacion_invitado:
-            response = {"status": "error", "redirect": "/eventos/" +
-            idEvento, "message": "El usuario ya participa en el evento"}
-            return jsonify(response)
-        
             
             db.execute(
                 "INSERT INTO participante_evento(id_evento,nombre_participante) values(?,?)", (idEvento, participante))
             conn.commit()
+
+            if validacion_invitado:
+                response = {"status": "error", "redirect": "/eventos/" +
+                idEvento, "message": "El usuario ya participa en el evento"}
+                return jsonify(response)
+        
+            
         else:
             respuesta = db.execute(
                 "SELECT id, usuario FROM usuarios WHERE usuario = ? OR email = ?", (
