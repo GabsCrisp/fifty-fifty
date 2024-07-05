@@ -255,7 +255,7 @@ def remover_participantes():
 def buscar_user():
     user = request.get_json()
     u = db.execute("SELECT usuario from usuarios WHERE usuario LIKE ? LIMIT 6",
-                   ("%" + user["username"] + "%",)).fetchall()
+                   (user["username"] + "%",)).fetchall()
     usuarios = []
     for user in u:
         usuarios.append(user[0])
