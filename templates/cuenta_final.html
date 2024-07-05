@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
-{% block css_principal %}{% endblock %}
+{% block css_principal %}
+<script src="/static/scripts/dom-to-image.min.js" ></script>
+<script src="/static/scripts/cuentaFinal.js" ></script>
+
+
+{% endblock %}
 {% block title %}Cuenta final{% endblock %}
 
 {% block head %}
@@ -16,8 +21,13 @@
 
 {% block content %}
 <h1>{{nombre_evento}}</h1>
+<td colspan="4" class="border-0">
+    <div class="button-container">
+        <button class="button-total" onclick="descargarContenido()">Descargar contenido</button>
+    </div>
+</td>
 <main>
-{% for record in data %}
+    {% for record in data %}
     <table class="table cuenta_final">
         <thead>
             <h5>{{record["nombre_participante"]}}</h5>
@@ -43,11 +53,6 @@
                 <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
                 <td class="border-0 text-end">{{record["subtotal"]}}</td>
             </tr>
-            <td colspan="4" class="border-0">
-                <div class="button-container">
-                    <button class="button-total">Descargar contenido</button>
-                </div>
-            </td>
         </tfoot>
     </table>
 {% endfor %}

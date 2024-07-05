@@ -8,7 +8,21 @@ def get_detalle_evento(db, idEvento, request, conn):
         respuesta_json = request.get_json()
         tipo_usuario = respuesta_json["tipoUsuario"]
         participante = respuesta_json["participante"]
+
+        validacion_invitado = db.execute("SELECT nombre_participante FROM participante_evento WHERE nombre_participante = ? AND id_evento = ?",(participante,idEvento)).fetchone()
+        validacion_invitado2 = db.execute("SELECT usuario FROM usuarios WHERE usuario = ?",(participante,)).fetchone()
+
+        if validacion_invitado:
+            response = {"status": "error", "redirect": "/eventos/" +
+            idEvento, "message": "Nombre de invitado ya existe"}
+            return jsonify(response)
+        
         if tipo_usuario == "invitado":
+            if validacion_invitado2:
+                response = {"status": "error", "redirect": "/eventos/" +
+                idEvento, "message": "No puede utilizar este nombre, favor seleccionar otro"}
+                return jsonify(response)
+            
             db.execute(
                 "INSERT INTO participante_evento(id_evento,nombre_participante) values(?,?)", (idEvento, participante))
             conn.commit()

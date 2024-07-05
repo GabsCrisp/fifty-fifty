@@ -164,6 +164,7 @@ main {
     justify-content: center;
     min-height: 70vh;
     gap: 1em;
+    background-color: #FBF9F1;
 }
 
 .table.cuenta_final {
