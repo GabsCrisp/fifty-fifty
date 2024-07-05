@@ -197,6 +197,10 @@ def eventos():
         conn.commit()
         response = {"status": "success", "redirect": "/eventos",
                     "message": "¡Evento registrado!"}
+        #insertamos por defecto al usuario creador del evento
+        idEvento= db.lastrowid
+        print(session)
+        db.execute("INSERT INTO participante_evento(id_evento,nombre_participante,id_usuario) values(?,?,?)", (idEvento, session['username'], session['id']))
         return jsonify(response)
 
 
@@ -237,7 +241,7 @@ def usuario():
 @app.route("/eventos/<idEvento>", methods=["GET", "POST"])
 @login_required
 def detalle_evento(idEvento):
-    return get_detalle_evento(db, idEvento, request, conn)
+    return get_detalle_evento(db, idEvento, request, conn, session)
 
 
 @app.route("/remover_participantes", methods=["POST"])
@@ -250,7 +254,7 @@ def remover_participantes():
 @login_required
 def buscar_user():
     user = request.get_json()
-    u = db.execute("SELECT usuario from usuarios WHERE usuario LIKE ?",
+    u = db.execute("SELECT usuario from usuarios WHERE usuario LIKE ? LIMIT 6",
                    ("%" + user["username"] + "%",)).fetchall()
     usuarios = []
     for user in u:
@@ -262,8 +266,6 @@ def buscar_user():
 @login_required
 def buscar_producto(idEvento):
     body = request.get_json()
-    print("A")
-    print(body)
     producto = db.execute("SELECT nombre_producto, precio_producto from productos WHERE id_evento = ? AND nombre_producto LIKE ?",
                           (idEvento, "%" + body["nombre_producto"] + "%")).fetchall()
     return jsonify(producto)
