@@ -107,6 +107,16 @@ h3 {
     margin-top: 1em;
 }
 
+.modal-content {
+    background-color:#DAE2B6;
+}
+.modal-content h1 {
+    font-family: 'poppins-bold';
+}
+
+.modal-content button {
+    background-color:#FBF9F1;
+}
 @media (max-width: 600px) {
     .icono_image_text {
         margin: 5%;
