@@ -39,6 +39,20 @@ Contiene todo lo que el usuario va a ver, ayudado por las hojas de estilo y scri
 
 - Archivo .gitignore: lista de archivos/ carpetas que no se suben al repositorio git
 
-- app.py:
+- Archvio app.py:
 Es el cerebro de la aplicación en donde se procesan todas las solicitudes del cliente. Permite a los usuarios registrarse, iniciar sesión, crear y gestionar eventos, añadir participantes, registrar consumos, y calcular una división justa de los gastos al finalizar un evento. Cada evento puede incluir múltiples participantes y cada consumo registrado se puede dividir entre ellos, incluyendo cálculos de impuestos y propinas.
 
+- Archivo cambio_base_datos.sql:
+Cuando el proyecto iba en un 60% notamos una necesidad de cambiar el diseño de la base de datos, por lo que respaldó en este archivo la consulta sql
+
+- Base de datos fiftyfifty.db:
+Utilizando SQLite creamos una base de datos para almacenar datos de usuarios, eventos, participantes y consumos.
+
+- Archivo helpers.py:
+En este archivo se declaran decoradores que facilitan el manejo de usuarios en la aplicación
+
+- Archivo requirements.txt:
+Contiene la lista de las dependencias del proyecto
+
+- Archivo services.py:
+Contiene dos funcionalidades importantes "agregar participante" y "remover participante"  que por complejidad en su momento se decidió trabajar en una archivo separado del app.py.
