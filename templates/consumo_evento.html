@@ -108,12 +108,14 @@
                         <span>C$ {{consumo['precio_total']}}</span>
                     </div>
 
-                    <label>Consumido por:</label>
-                    {% for key,value in consumo['consumidores'].items() %}
-                    <ol>
-                        {{value}}
-                    </ol>
-                    {% endfor %}
+                    <div class="item">
+                        <label>Consumido por:</label>
+                        {% for key,value in consumo['consumidores'].items() %}
+                        <ol>
+                            {{value}}
+                        </ol>
+                        {% endfor %}
+                    </div>
                 </li>
                 <hr class="divisor">
                 {% endfor %}
@@ -123,7 +125,7 @@
 </main>
 <div class="button-container">
     <form action="/{{id_evento}}/finalizar" method="post" class="finalizar-evento">
-        <button class="">Finalizar evento</button>
+        <button class="finalizar-eventoboton">Finalizar evento</button>
     </form>
 
 </div>

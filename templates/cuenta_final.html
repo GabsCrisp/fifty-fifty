@@ -32,26 +32,26 @@
         <thead>
             <h5>{{record["nombre_participante"]}}</h5>
             <tr>
-                <th class="text-start">Producto</th>
-                <th class="text-end">Precio unitario</th>
-                <th class="text-end">Cantidad</th>
-                <th class="text-end">Subtotal</th>
+                <th class="text-center align-middle">Producto</th>
+                <th class="text-center align-middle">Precio</th>
+                <th class="text-center align-middle">Cantidad</th>
+                <th class="text-center align-middle">Subtotal</th>
             </tr>
         </thead>
         <tbody>
             {% for row in record["consumos"]%}
             <tr>
                 <td class="text-start">{{row[0]}}</td>
-                <td class="text-end">{{row[1]}}</td>
-                <td class="text-end">{{row[2]}}</td>
-                <td class="text-end">{{row[3]}}</td>
+                <td class="text-center align-middle">C${{row[1] | round(2)}}</td>
+                <td class="text-center align-middle">{{row[2]}}</td>
+                <td class="text-center align-middle">C${{row[3] | round(2)}}</td>
             </tr>
             {% endfor %}
         </tbody>
         <tfoot>
             <tr>
                 <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
-                <td class="border-0 text-end">{{record["subtotal"]}}</td>
+                <td class="border-0 text-center align-middle">C${{record["subtotal"] | round(2)}}</td>
             </tr>
         </tfoot>
     </table>

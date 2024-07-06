@@ -207,8 +207,10 @@ main {
 
 .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
+    padding-right: 1em;
+   padding-bottom: 2em;
 }
 
 .button-total {
@@ -227,8 +229,12 @@ main {
 }
 
 .button-total:hover {
-    background-color: #DAE2B6;
-    /* Color de fondo del botón al pasar el mouse */
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    border-radius: 1em;
+    padding: 0.5em 3em 0.5em 3em;
+    font-family: 'poppins-bold';
+    transition: 1s;
 }
 
 @media (max-width: 400px) {
@@ -278,6 +284,39 @@ main {
         padding: 4px;
         /* Reducir el padding de las celdas */
     }
+
+    .button-container {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        padding-right: 1em;
+       padding-bottom: 2em;
+    }
+    
+    .button-total {
+        width: auto;
+        background-color: #43766C;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        justify-content: center;
+        padding: 0.5em;
+        font-size: 0.85em;
+        color: white;
+        /* Color del texto en el botón */
+        font-family: 'poppins-bold';
+        cursor: pointer;
+        text-align: center;
+    }
+    
+    .button-total:hover {
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+        border: 1px solid transparent;
+        border-radius: 1em;
+        padding: 0.5em 3em 0.5em 3em;
+        font-family: 'poppins-bold';
+        transition: 1s;
+    }
 }
 
 @media (max-width: 300px) {
@@ -302,5 +341,29 @@ main {
     .table.cuenta_final td {
         padding: 3px;
         /* Reducir el padding de las celdas */
+    }
+    .button-total {
+        width: auto;
+        background-color: #43766C;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        justify-content: center;
+        padding: 0.5em;
+        font-size: 0.8em;
+        color: white;
+        /* Color del texto en el botón */
+        font-family: 'poppins-bold';
+        cursor: pointer;
+        text-align: center;
+    }
+    
+    .button-total:hover {
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+        border: 1px solid transparent;
+        border-radius: 1em;
+        padding: 0.5em 3em 0.5em 3em;
+        font-family: 'poppins-bold';
+        transition: 1s;
     }
 }
