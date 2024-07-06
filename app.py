@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, jsonify, session, flash
 from flask_session import Session
-from helpers import login_required, session_activate
+from helpers import login_required, session_activate, evento_finalizado
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
@@ -110,6 +110,8 @@ def register():
 
 
 @app.route("/eventos/<idEvento>/consumo_evento")
+@login_required
+@evento_finalizado
 def consumo_evento(idEvento):
     rows = db.execute(
         "SELECT * FROM participante_evento WHERE id_evento = ?", (idEvento,)
@@ -171,6 +173,8 @@ def consumo_evento(idEvento):
 @login_required
 def eventos():
     if request.method == "GET":
+        if(session.get('evento')):
+            session.pop('evento')
         rows = db.execute(
             """
             SELECT 
@@ -322,12 +326,15 @@ def finalizar_evento(idEvento):
     db.execute(
         "UPDATE eventos SET estado = 'FINALIZADO' WHERE id_evento = ?", (idEvento,))
     conn.commit()
+    session['evento'] = 'FINALIZADO'
+    print(session)
     return redirect('/' + idEvento + '/cuenta_final')
 
 
 @app.route("/<idEvento>/cuenta_final")
 @login_required
 def cuenta_final(idEvento):
+    print(session)
     nombre_evento = db.execute(
         "SELECT nombre_evento FROM eventos WHERE id_evento = ?", (idEvento,)).fetchone()[0]
     rows = db.execute(
