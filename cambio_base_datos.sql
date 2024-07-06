@@ -19,7 +19,10 @@
 --id_consumo INTEGER NOT NULL,
 --id_participante INTEGER NOT NULL,
 --cantidad_individual INTEGER,
---subtotal_participante INTEGER,
+--subtotal_participante NUMERIC,
+--id_evento INTEGER NOT NULL,
+--propina NUMERIC,
+--impuesto NUMERIC,
 --FOREIGN KEY (id_participante) REFERENCES participante_evento(id_participante_evento)
 --FOREIGN KEY (id_consumo) REFERENCES consumo_general(id_consumo)
 --);
@@ -27,4 +30,4 @@
 
 --Todavía no hay drop de consumo_participante hasta que se sepa que está correcto lo que se pensó
 --Acá está el comando si:
---DROP TABLE consumo_participante
+--DROP TABLE consumo_cadaparticipante

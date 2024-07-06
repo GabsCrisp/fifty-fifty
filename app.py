@@ -284,7 +284,6 @@ def crear_consumo(idEvento):
     id_cantidad = request.form.get("id_cantidad")
     participantes = request.form.getlist("participantes")
     cantidad_individual = request.form.getlist("cantidad_individual")
-
     productodb = db.execute(
         "SELECT id_producto,nombre_producto,precio_producto FROM productos WHERE id_evento = ? AND nombre_producto = ?", (idEvento, id_producto)).fetchone()
     if not productodb:
@@ -297,7 +296,7 @@ def crear_consumo(idEvento):
     # subtotal = int(id_precio) * int(id_cantidad) / len(participantes)
     # obtener el subtotal por participante
     # bucle para insertar consumo
-    total_consumo = float(id_precio) * int(id_cantidad)
+    total_consumo = float(id_precio) * float(id_cantidad)
     db.execute("INSERT INTO consumo_general (id_producto, cantidad_consumida, precio_uniproducto, total_consumo, id_evento) values(?,?,?,?, ?)",
                (productodb[0], id_cantidad, productodb[2], total_consumo, idEvento))
     conn.commit()
@@ -307,15 +306,15 @@ def crear_consumo(idEvento):
     for index, item in enumerate(participantes):
         print(item)
         if (len(cantidad_individual) == 0):
-            subtotal_participante = int(productodb[2])/len(participantes)
+            subtotal_participante = float(productodb[2])/len(participantes)
             db.execute("INSERT INTO consumo_cadaparticipante(id_consumo, id_participante, cantidad_individual, subtotal_participante, id_evento) VALUES(?, ?, ?, ?, ?)",
                        (id_consumo, item, 1, subtotal_participante, idEvento))
             conn.commit()
         else:
-            subtotal_participante = int(
-                productodb[2])*int(cantidad_individual[index])
+            subtotal_participante = float(
+                productodb[2])*float(cantidad_individual[index])
             db.execute("INSERT INTO consumo_cadaparticipante(id_consumo, id_participante, cantidad_individual, subtotal_participante, id_evento) VALUES(?, ?, ?, ?, ?)",
-                       (id_consumo, item, int(cantidad_individual[index]), subtotal_participante, idEvento))
+                       (id_consumo, item, float(cantidad_individual[index]), subtotal_participante, idEvento))
             conn.commit()
     return redirect('/eventos/' + idEvento + '/consumo_evento')
 
