@@ -190,6 +190,7 @@ def eventos():
                 participante_evento pe ON pe.id_evento = e.id_evento AND pe.id_usuario = ?
             WHERE 
                 e.id_usuario = ? OR pe.id_usuario IS NOT NULL
+            ORDER BY e.f_creacion DESC
 
             """, (session["id"],session["id"])).fetchall()
         return render_template("eventos.html", rows=rows)
