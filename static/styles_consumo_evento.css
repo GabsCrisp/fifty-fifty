@@ -247,10 +247,17 @@ h1 {
 }
 
 .participants {
-    width: 30%;
+    width: 25%;
     flex-direction: column;
+    align-items: flex-start;
     gap: 0.5em;
     font-size: 1em;
+    display: flex;
+    overflow-y: scroll;
+    max-height: 200px;
+    padding: 0.3em;
+    border: 3px solid #97A265;
+    border-radius: 10px;
 }
 
 .resumenes {
@@ -364,63 +371,35 @@ li .subtotal {
     gap: 1em;
 }
 
-.participants-checkbox {
-    display: flex;
-    align-items: flex-start;
-    border-radius: 10px;
-    border: 3px solid #43766C;
-    width: 80%;
-    gap: 1em;
-    max-height: 200px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
 
 @media(max-width: 700px) {
     .info {
 
         flex-direction: column;
+        align-items: center;
     }
-
+    
     .consumos {
         flex-direction: column;
-    }
-
-    .participants {
-
-        margin-right: 1em;
-        justify-content: center;
-        border: 2px solid rgb(193, 161, 161);
-        border-radius: 10px;
-        box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
+        align-items: center;
         width: 100%;
-        padding: 1em;
     }
-
-    .participants-checkbox {
-        font-size: 0.85em;
-        padding: 0.4em;
-        height: 100%;
-        width: 100%;
-        justify-content: center;
-        max-height: 300px;
-        overflow-y: auto;
-        overflow-x: hidden;
+    
+    .participants
+    {
+        margin-top: 1em;
+        width: 90%;
     }
-
+    
     .botones_consumo {
         width: 100vw;
-
+        
     }
-
+    
     .cuenta_resumen li {
         font-size: 1.1em;
     }
-    main {
-        overflow-x: hidden;
-        min-height: 100vh;
-    }
-
+    
     .button-container {
         margin-bottom: 1em;
         gap: 1em;
@@ -444,12 +423,25 @@ li .subtotal {
     .inputs {
         text-align: start;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
+    }
+    .container-label
+    {
+        width: 100%;
+    }
+    .input 
+    {
+        width: 100%;
     }
 
 }
 
-@media(max-width: 450px) {
+@media(max-width: 450px) 
+{
+
 
     .info {
 
@@ -477,29 +469,6 @@ li .subtotal {
         flex-direction: column;
     }
 
-    .participants {
-
-        margin-right: 1em;
-        justify-content: center;
-        gap: 1em;
-        border: 2px solid rgb(193, 161, 161);
-        border-radius: 10px;
-        box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        padding: 1em;
-    }
-
-    .participants-checkbox {
-        padding: 0.5em;
-        height: 100%;
-        width: 100%;
-        gap: 1em;
-        justify-content: center;
-        max-height: 400px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-
     .botones_consumo button {
         margin-top: 1em;
         width: 40%;
@@ -514,10 +483,6 @@ li .subtotal {
         font-family: 'poppins-bold';
         top: 1em;
 
-    }
-
-    main {
-        min-height: 100vh;
     }
 
     .button-container {

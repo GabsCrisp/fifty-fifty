@@ -63,15 +63,13 @@
         <div class="participants">
             <label for="" class="shared-by">Compartido por: <span class="add"><a
                         href="/eventos/{{id_evento}}">Agregar</a></span></label>
-            <form class="participants-checkbox">
-                {% for record in rows %}
-                <div class="nombre_participante">
-                    <input class="input participantes" type="checkbox" id="{{record[0]}}" name="participantes"
-                        value="{{record[0]}}" form="id_form_consumo" class="participantes" disabled>
-                    <label for="{{record[0]}}">{{record[3]}}</label>
-                </div>
-                {% endfor %}
-            </form>
+            {% for record in rows %}
+            <div class="nombre_participante">
+                <input class="input participantes" type="checkbox" id="{{record[0]}}" name="participantes"
+                    value="{{record[0]}}" form="id_form_consumo" class="participantes" disabled>
+                <label for="{{record[0]}}">{{record[3]}}</label>
+            </div>
+            {% endfor %} 
         </div>
     </section>
     <section class="resumenes">
@@ -122,12 +120,12 @@
             </ul>
         </div>
     </section>
+    <div class="button-container">
+        <form action="/{{id_evento}}/finalizar" method="post" class="finalizar-evento">
+            <button class="finalizar-eventoboton">Finalizar evento</button>
+        </form>
+    
+    </div>
 </main>
-<div class="button-container">
-    <form action="/{{id_evento}}/finalizar" method="post" class="finalizar-evento">
-        <button class="finalizar-eventoboton">Finalizar evento</button>
-    </form>
-
-</div>
 <script src="/static/scripts/consumoEvento.js"></script>
 {% endblock %}

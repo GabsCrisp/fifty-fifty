@@ -124,6 +124,7 @@ def consumo_evento(idEvento):
                 participante_evento.id_participante_evento = consumo_cadaparticipante.id_participante
                 where participante_evento.id_evento = ? group by participante_evento.id_participante_evento""", (idEvento,)).fetchall()
 
+    print(consumo_cadaparticipante)
     id_consumo = db.execute(
         "select id_consumo, id_participante from consumo_cadaparticipante where id_evento = ?", (idEvento,)).fetchall()
     consumo = {}
@@ -161,9 +162,7 @@ def consumo_evento(idEvento):
                 consumo_info["precio"] = i[9]
                 consumo_info["cantidad"] = i[2]
                 consumo_info["precio_total"] = i[4]
-                print(consumo_info)
                 consumo_final.append(consumo_info)
-                print(consumo_final)
 
     # print(consumo_final)
     return render_template("consumo_evento.html", rows=rows, id_evento=idEvento, nombre_evento=nombre_evento, lista_categoria=lista_categoria, consumo_cadaparticipante=consumo_cadaparticipante, consumo_final=consumo_final)
@@ -297,7 +296,7 @@ def crear_consumo(idEvento):
     # subtotal = int(id_precio) * int(id_cantidad) / len(participantes)
     # obtener el subtotal por participante
     # bucle para insertar consumo
-    total_consumo = int(id_precio) * int(id_cantidad)
+    total_consumo = float(id_precio) * int(id_cantidad)
     db.execute("INSERT INTO consumo_general (id_producto, cantidad_consumida, precio_uniproducto, total_consumo, id_evento) values(?,?,?,?, ?)",
                (productodb[0], id_cantidad, productodb[2], total_consumo, idEvento))
     conn.commit()
