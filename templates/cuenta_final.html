@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{nombre_evento}}</h1>
+<h1 id="titulo_nombre_evento">{{nombre_evento}}</h1>
 <td colspan="4" class="border-0">
     <div class="button-container">
         <button class="button-total" onclick="descargarContenido()">Descargar contenido</button>
@@ -50,8 +50,20 @@
         </tbody>
         <tfoot>
             <tr>
-                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
+                <td class="border-0 fw-bold text-end" colspan="3">Subtotal persona</td>
                 <td class="border-0 text-center align-middle">C${{record["subtotal"] | round(2)}}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Impuesto</td>
+                <td class="border-0 text-center align-middle">C${{record["total_impuesto"] | round(2)}}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Propina</td>
+                <td class="border-0 text-center align-middle">C${{record["total_propina"] | round(2)}}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">Total persona</td>
+                <td class="border-0 text-center align-middle">C${{record["total"] | round(2)}}</td>
             </tr>
         </tfoot>
     </table>

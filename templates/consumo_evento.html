@@ -127,5 +127,39 @@
     
     </div>
 </main>
+<div class="button-container">
+    <div class="finalizar-evento">
+        <button class="finalizar-eventoboton" data-bs-toggle="modal" data-bs-target="#exampleModal">Finalizar
+            evento</button>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Finalizar evento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/{{id_evento}}/finalizar" method="post" class="finalizar-evento" id="finalizar_evento">
+                    <div class="input-group mb-3">
+                        <input type="number" name="impuesto" class="form-control" min="0" max="100" placeholder="Digite impuesto si aplica">
+                        <span class="input-group-text" id="basic-addon2">%</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" name="propina" class="form-control" min="0" max="100" placeholder="Digite propina si aplica">
+                        <span class="input-group-text" id="basic-addon2">%</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn wrong-button" data-bs-dismiss="modal">Descartar</button>
+                <button type="submit" class="btn right-button" form="finalizar_evento">Crear</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="/static/scripts/consumoEvento.js"></script>
 {% endblock %}
