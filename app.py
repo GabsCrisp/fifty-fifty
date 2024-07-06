@@ -323,6 +323,12 @@ def crear_consumo(idEvento):
 @app.route("/<idEvento>/finalizar", methods=["POST"])
 @login_required
 def finalizar_evento(idEvento):
+    impuesto = float(request.form.get("impuesto"))/100
+    propina = float(request.form.get("propina"))/100
+
+    db.execute(
+        "UPDATE consumo_cadaparticipante SET propina = subtotal_participante * ?, impuesto = subtotal_participante * ? WHERE id_evento = ?",(propina,impuesto,idEvento)
+    )
     db.execute(
         "UPDATE eventos SET estado = 'FINALIZADO' WHERE id_evento = ?", (idEvento,))
     conn.commit()
@@ -346,7 +352,7 @@ def cuenta_final(idEvento):
         to_add = {
             "id_participante_evento": row[0], "nombre_participante": row[1]}
         consumo_rows = db.execute("""
-        SELECT p.nombre_producto, ccg.precio_uniproducto, SUM(ccp.cantidad_individual), SUM(ccp.subtotal_participante) FROM consumo_cadaparticipante ccp 
+        SELECT p.nombre_producto, ccg.precio_uniproducto, SUM(ccp.cantidad_individual), SUM(ccp.subtotal_participante), SUM(ccp.propina), Sum(ccp.impuesto) FROM consumo_cadaparticipante ccp 
               INNER JOIN consumo_general ccg ON ccg.id_consumo = ccp.id_consumo
             INNER JOIN productos p ON ccg.id_producto = p.id_producto
             WHERE ccp.id_evento = ? AND ccp.id_participante = ?            
@@ -355,11 +361,17 @@ def cuenta_final(idEvento):
         """, (idEvento, row[0])).fetchall()
         to_add["consumos"] = consumo_rows
         subtotal_participante = 0.0
+        total_propina = 0.0
+        total_impuesto = 0.0
         for record in consumo_rows:
             subtotal_participante = subtotal_participante + float(record[3])
+            total_propina = total_propina + float(record[4])
+            total_impuesto = total_impuesto + float(record[5])
 
         to_add["subtotal"] = subtotal_participante
-
+        to_add["total_propina"] = total_propina
+        to_add["total_impuesto"] = total_impuesto
+        to_add["total"] = subtotal_participante + total_impuesto + total_propina
         data.append(to_add)
 
     return render_template("cuenta_final.html", data=data, nombre_evento=nombre_evento)
