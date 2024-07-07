@@ -15,15 +15,14 @@ def get_detalle_evento(db, idEvento, request, conn, session):
                 response = {"status": "error", "redirect": "/eventos/" +
                 idEvento, "message": "Ya existe un invitado con este nombre"}
                 return jsonify(response)
-            
-            db.execute(
-                "INSERT INTO participante_evento(id_evento,nombre_participante) values(?,?)", (idEvento, participante))
-            conn.commit()
-
-            if validacion_invitado:
+            elif validacion_invitado:
                 response = {"status": "error", "redirect": "/eventos/" +
                 idEvento, "message": "El usuario ya participa en el evento"}
                 return jsonify(response)
+            else:
+                db.execute(
+                    "INSERT INTO participante_evento(id_evento,nombre_participante) values(?,?)", (idEvento, participante))
+                conn.commit()
         
             
         else:
